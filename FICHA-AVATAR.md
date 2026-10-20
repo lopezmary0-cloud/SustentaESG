@@ -1,6 +1,6 @@
 # FICHA DE AVATAR — SustentaESG
 
-- Estado: **BORRADOR** — las frases de abajo salen de tus documentos y están marcadas por ellos mismos como "propuestas, no citas verificadas". Faltan ≥10 frases reales con fuente (entrevistas, ver docs/producto/GUION-ENTREVISTAS.md). Mientras sea BORRADOR está PROHIBIDO derivar copy de venta.
+- Estado: **POR APROBAR** — base: tus documentos de investigación (no hay entrevistas en este proyecto). Las frases son hipótesis de esos documentos, no citas de clientes: el copy NO las presenta como testimonios ni como cifras reales. Se aprueba cuando tú la confirmes.
 
 ## El avatar (cliente ideal — UNA persona)
 - Arquetipo: **Carolina**, 38, consultora independiente de sostenibilidad · Colombia · atiende 5–10 pymes (diagnóstico, informes, planes, acompañamiento)
@@ -33,8 +33,7 @@
 5. (identidad) "Ser vista como la consultora profesional y ordenada"
 
 ## Voice of customer REAL (Fuente 2)
-- Hasta hoy: 0 frases verificadas. Único dato externo parcial: encuesta de QuickESG (proveedor, anecdótica) — primer dolor de consultores: integrar datos de varios departamentos; segundo: digitar en Excel (linkedin.com/company/quickesg, 2026-10-20).
-- Pendiente: 10 entrevistas a consultores (guion listo) + 3–5 a responsables de pyme.
+- Sin frases de clientes reales. Único dato externo parcial: encuesta de QuickESG (proveedor, anecdótica) — primer dolor de consultores: integrar datos de varios departamentos; segundo: digitar en Excel (linkedin.com/company/quickesg, 2026-10-20).
 
 ## Consciencia y sofisticación
 - Consciencia: solución-aware (tu investigación, no verificada con usuarios). Sofisticación: etapa 3–4 probable (varios competidores prometen "diagnóstico automático"); NO verificado.
@@ -55,5 +54,5 @@
 
 ## Cierre
 - INVENTARIO DE PRUEBA DÍA-1: ninguno (sin betas, sin resultados, sin testimonios). La landing no puede tener testimonios ni cifras de clientes.
-- ¿Entrevistas del 44?: NO → pendiente
+- ¿Entrevistas del 44?: NO APLICAN en este proyecto (decisión del usuario)
 - Fecha: 2026-10-20 · Aprobada por el usuario: NO

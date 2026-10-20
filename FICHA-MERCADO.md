@@ -21,7 +21,7 @@
 - Observación: Consultor (hasta 10 clientes) cuesta solo US$10/año más que Empresa; poca discriminación de precio. Revisar tras la beta.
 
 ## 2. CICLO DE DECISIÓN
-- NO ENCONTRADO para consultores ESG en Colombia. Supuesto de trabajo (a validar en entrevistas): compra B2B de bajo monto, decisión individual en días-semanas.
+- NO ENCONTRADO para consultores ESG en Colombia. Supuesto de trabajo (sin validar): compra B2B de bajo monto, decisión individual en días-semanas.
 - Ventana mínima antes de declarar fracasada una campaña: 30 días (provisional, sin dato propio).
 
 ## 3. CÓMO PAGA ESTE MERCADO

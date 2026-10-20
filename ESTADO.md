@@ -41,7 +41,7 @@
 - Orden: ventas → recorrido de inicio → planes → login → app → servicios reales (Supabase real, Vercel, Resend, dominio). Capa de datos local con la misma forma que las tablas finales.
 
 ## Pendientes y riesgos abiertos
-- ⚠️ Realizar 10 entrevistas a consultores (docs/producto/GUION-ENTREVISTAS.md) antes de la página de ventas.
+- ⚠️ Copy de venta: se deriva de tus documentos de investigación; NO habrá entrevistas (no aplican a esta app). Se desbloquea cuando apruebes la FICHA-AVATAR.
 - ⚠️ Verificar en Hotmart: comisión Colombia, si la prueba pide tarjeta, plazos de garantía, comportamiento de PSE.
 - ⚠️ Nombre/dominio/marca SustentaESG sin verificar (SIC).
 - ⚠️ Ley 1581: política de privacidad y rol Responsable/Encargado → revisión de abogado antes de vender.
