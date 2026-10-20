@@ -20,6 +20,7 @@
 - Precio de lanzamiento (tus hipótesis, sin cambio): Empresa US$9/mes · US$60/año. Consultor US$15/mes · US$70/año.
 - Límites propuestos: Empresa = 1 organización; Consultor = hasta 10 clientes (revisable). Sin IA en el MVP → costo marginal por usuario ≈ 0.
 - Costos fijos estimados al vender (terceros, a verificar): Vercel Pro ~US$20/mes, Supabase Pro ~US$25/mes, dominio ~US$1/mes ≈ US$46/mes. Hotmart: ~9,9% + US$0,50 por venta según un tercero (no confirmado). Punto de equilibrio aproximado: ~4 consultores mensuales.
+- **Modelo de cuentas (decidido 2026-10-20):** la información es por EMPRESA y acumulativa. Una suscripción (persona) puede tener varias empresas; cada empresa es un espacio separado con su propio diagnóstico, historial, plan y evidencias. Nunca se mezclan datos entre empresas. Plan Empresa = 1 empresa; plan Consultor = hasta 10 empresas. Aplica igual a consultores internos y externos. Invitar a más personas a una empresa y traspasar una empresa a otra cuenta → versión posterior.
 - Suelo de canal (publicidad): no evaluado; con US$15/mes la publicidad pagada probablemente no se paga. Se revisa antes de invertir en anuncios.
 
 ## Estado de las fichas (memoria del proyecto)
