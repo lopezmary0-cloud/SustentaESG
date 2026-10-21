@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es" data-kit="abc-v2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combinación A + C + Bosque — SustentaESG</title>
+<!-- KIT-ABC-V2 (combinación v2: A + C + rueda + colores e ilustración de la 4ª imagen del usuario).
+     El marcador data-kit="abc-v2" NO se borra. Fallback-trampa: cada familia lleva `monospace`. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Figtree:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: radial-gradient(1100px 520px at 12% -6%, #f7f7f9, transparent 62%), radial-gradient(900px 460px at 92% 4%, #e2e2e9, transparent 58%), linear-gradient(180deg, #ededf0, #e4e4e9);
+    color: #1c1c1f; font-family: 'Segoe UI', system-ui, sans-serif; padding: 32px 20px 64px; }
+  .cabecera { max-width: 1180px; margin: 0 auto 12px; }
+  .cabecera h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .cabecera p.sub { margin-top: 6px; font-size: 14px; color: #55555c; max-width: 78ch; line-height: 1.5; }
+  .salidas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .salidas span { display: inline-flex; align-items: center; gap: 6px; border: 1px solid #c9c9cf; border-radius: 999px; padding: 6px 12px; font-size: 12.5px; font-weight: 600; color: #3a3a40; background: #f7f7f8; }
+  .salidas b { color: #1c1c1f; }
+  .col-t { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #85858e; margin-bottom: 12px; text-align: center; }
+  .fila1 { max-width: 1180px; margin: 28px auto 0; display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); align-items: start; justify-items: center; }
+  .ref { width: 100%; max-width: 360px; }
+  .ref figure { background: #fff; border: 1px solid #d0d0d6; border-radius: 8px; padding: 8px; box-shadow: 0 10px 30px rgb(20 18 24 / .12); }
+  .ref img { display: block; width: 100%; height: auto; border-radius: 4px; }
+  .ref figcaption { font-size: 12px; color: #55555c; margin-top: 6px; text-align: center; }
+  .meta { margin-top: 14px; background: #f7f7f8; border: 1px solid #d9d9de; border-radius: 14px; padding: 16px; font-size: 13px; line-height: 1.55; color: #3a3a40; }
+  .meta h2 { font-size: 15px; margin-bottom: 6px; color: #1c1c1f; }
+  .meta ul { margin-left: 16px; }
+  .paleta { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .paleta span { width: 26px; height: 26px; border-radius: 999px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .18), 0 1px 3px rgb(0 0 0 / .12); }
+  .espec { margin-top: 10px; border-top: 1px solid #d9d9de; padding-top: 10px; }
+  .espec .d { font-family: 'Newsreader', monospace; font-size: 21px; color: #17261c; }
+  .espec .b { font-family: 'Figtree', monospace; font-size: 13.5px; margin-top: 3px; }
+
+  /* ═══ TOKENS ═══ */
+  .oscuro {
+    --bg: #0f1418; --surface: #161c22; --elev: #1b2126; --line: #2a3138;
+    --text-1: #e8ede6; --text-2: #98a39a; --accent: #8fbf7f; --on-accent: #0f1418;
+    --radius-card: 14px; --radius-btn: 10px;
+    --font-display: 'Newsreader', monospace; --font-body: 'Figtree', monospace;
+    --s1: #b87b4e; --s2: #c9a66b; --s3: #5f8a4f; --s4: #a9d08e;
+    --c-amb: #8fbf7f; --c-soc: #c9a66b; --c-gob: #d08a5a; --c-eco: #7fb3a6;
+    --card-sombra: 0 10px 22px -14px rgb(0 0 0 / .7); --card-borde: 1px solid rgb(255 255 255 / .06);
+    --fondo-tel: radial-gradient(260px 200px at 90% -4%, #22382b, transparent 70%), radial-gradient(240px 200px at -10% 38%, #2a2a1e, transparent 70%), var(--bg);
+  }
+  .claro {
+    --bg: #f1f4ec; --surface: #ffffff; --elev: #ffffff; --line: #dde3d6;
+    --text-1: #17261c; --text-2: #5d6d60; --accent: #3f6b3d; --on-accent: #ffffff;
+    --radius-card: 14px; --radius-btn: 10px;
+    --font-display: 'Newsreader', monospace; --font-body: 'Figtree', monospace;
+    --s1: #b87b4e; --s2: #c9a66b; --s3: #5f8a4f; --s4: #8fbf7f;
+    --c-amb: #3f7a45; --c-soc: #a8802f; --c-gob: #b4673a; --c-eco: #3d8a7b;
+    --card-sombra: 0 10px 22px -14px rgb(23 38 28 / .35); --card-borde: 1px solid rgb(23 38 28 / .06);
+    --fondo-tel: radial-gradient(260px 200px at 90% -4%, #dcebd3, transparent 70%), radial-gradient(240px 200px at -10% 38%, #f2ecd6, transparent 70%), var(--bg);
+  }
+
+  .telefono { width: 310px; margin: 0 auto; aspect-ratio: 9 / 19.5; border: 10px solid #07090b; border-radius: 46px; box-shadow: 0 24px 60px rgb(20 18 24 / .35);
+    overflow: hidden; position: relative; display: flex; flex-direction: column; background: var(--fondo-tel); }
+  .statusbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 22px 6px; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text-1); }
+  .statusbar .der { display: flex; align-items: center; gap: 5px; }
+  .statusbar svg { display: block; }
+  .home-indicator { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 116px; height: 5px; border-radius: 999px; opacity: .85; background: var(--text-1); }
+  .pantalla { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; padding: 0 16px; font-family: var(--font-body); color: var(--text-1); }
+  .over { margin-top: 8px; font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); }
+  h3.t { font-family: var(--font-display); font-size: 25px; font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; margin-top: 2px; }
+  h3.t em { font-style: normal; color: var(--accent); }
+  .heroe { margin-top: 10px; border-radius: var(--radius-card); padding: 13px 14px; color: #f1f4ea; position: relative; overflow: hidden;
+    background: radial-gradient(170px 120px at 100% 0%, #5d8a50aa, transparent 70%), linear-gradient(145deg, #2f4d36, #1a2c20); box-shadow: 0 14px 28px -12px rgb(26 44 32 / .7); border: 1px solid rgb(255 255 255 / .08); }
+  .heroe .hl { font-size: 10.5px; font-weight: 600; opacity: .8; }
+  .heroe .hn { font-family: var(--font-display); font-size: 52px; font-weight: 300; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .heroe .hn small { font-family: var(--font-body); font-size: 13px; font-weight: 600; opacity: .75; letter-spacing: 0; }
+  .heroe .hp { display: inline-flex; margin-top: 6px; font-size: 10px; font-weight: 700; background: rgb(255 255 255 / .14); border-radius: 999px; padding: 3px 9px; }
+  .heroe svg.mini { position: absolute; right: 0; bottom: 0; opacity: .55; }
+  .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .bt { background: var(--surface); border-radius: var(--radius-card); padding: 9px 10px 10px; box-shadow: var(--card-sombra); border: var(--card-borde); }
+  .bt .top { display: flex; align-items: center; justify-content: space-between; }
+  .bt .chip { width: 24px; height: 24px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--c); background: color-mix(in oklab, var(--c) 18%, transparent); flex-shrink: 0; }
+  .bt .pt { font-family: var(--font-display); font-size: 21px; font-weight: 400; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .bt .nm { font-size: 10.5px; font-weight: 700; margin-top: 5px; }
+  .bt .sb { font-size: 8.5px; color: var(--text-2); margin-top: 1px; }
+  .seg { display: flex; gap: 2px; height: 6px; margin-top: 6px; }
+  .seg i { display: block; border-radius: 1px; }
+  .ancho { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; }
+  .ancho p { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+  .ancho p b { color: var(--text-1); }
+  .cta { display: flex; align-items: center; justify-content: center; height: 46px; border-radius: var(--radius-btn); background: var(--accent); color: var(--on-accent); font-size: 14.5px; font-weight: 700; box-shadow: 0 10px 22px -6px color-mix(in oklab, var(--accent) 45%, transparent); flex-shrink: 0; margin-top: 10px; }
+  .tabbar { display: flex; align-items: stretch; justify-content: space-around; margin: auto -16px 0; padding: 8px 8px 16px; border-top: 1px solid var(--line); background: color-mix(in oklab, var(--surface) 90%, transparent); flex-shrink: 0; }
+  .tabbar a { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9.5px; font-weight: 600; color: var(--text-2); text-decoration: none; }
+  .tabbar .tab-chip { display: flex; align-items: center; justify-content: center; width: 36px; height: 26px; border-radius: 9px; }
+  .tabbar a.activa { color: var(--accent); }
+  .tabbar a.activa .tab-chip { background: color-mix(in oklab, var(--accent) 16%, transparent); }
+
+  /* ═══ HERO con rueda sobre el paisaje de datos ═══ */
+  .hero { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid rgb(255 255 255 / .08); box-shadow: 0 16px 40px rgb(0 0 0 / .35);
+    font-family: var(--font-body); color: var(--text-1); background: linear-gradient(180deg, #17261e 0%, #121b18 40%, #0f1418 70%); }
+  .hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 60%; pointer-events: none;
+    background: radial-gradient(300px 150px at 0% 100%, #3a2f1a66, transparent 70%), radial-gradient(260px 140px at 100% 100%, #2c4a3166, transparent 70%); }
+  .hero svg.paisaje { position: absolute; left: 0; top: 0; width: 100%; height: 62%; display: block; }
+  .hero .velo { position: absolute; left: 0; right: 0; top: 0; height: 62%; background: linear-gradient(180deg, transparent 40%, #0f1418 100%); }
+  .hero .cont { position: relative; z-index: 1; }
+  .hero .badge { display: inline-flex; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: rgb(15 20 24 / .6); border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent); border-radius: 999px; padding: 4px 10px; backdrop-filter: blur(4px); }
+  .hero svg.rueda { display: block; margin: 0 auto; }
+  .hero .sub { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+  .hero .sub b { color: var(--text-1); font-weight: 600; }
+  .hero .hcta { display: flex; align-items: center; justify-content: center; height: 46px; border-radius: var(--radius-btn); font-size: 14.5px; font-weight: 700; color: var(--on-accent);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 86%, white), var(--accent)); box-shadow: inset 0 1px 0 rgb(255 255 255 / .35), 0 10px 24px -6px color-mix(in oklab, var(--accent) 50%, transparent); }
+  .hero .prueba { font-size: 11.5px; color: var(--text-2); text-align: center; margin-top: 10px; }
+
+  .hero-m { width: 310px; margin: 0 auto; padding: 16px 10px; }
+  .hero-m .cont { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .hero-m .leyenda { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; margin: 6px 4px 12px; text-align: left; width: 100%; }
+  .hero-m .leyenda p { font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .hero-m .leyenda i { width: 9px; height: 9px; border-radius: 3px; flex-shrink: 0; }
+  .hero-m .sub { margin: 0 6px; }
+  .hero-m .hcta { margin: 14px 6px 0; width: calc(100% - 12px); }
+
+  .hero-d { max-width: 940px; margin: 40px auto 0; padding: 40px 36px 34px; }
+  .hero-d .cab { text-align: center; }
+  .hero-d h2 { font-family: var(--font-display); font-weight: 400; font-size: 40px; letter-spacing: -0.015em; line-height: 1.08; margin-top: 10px; color: #f1f4ea; }
+  .hero-d h2 em { font-style: normal; color: var(--accent); }
+  .hero-d .sub { max-width: 560px; margin: 10px auto 0; font-size: 15px; text-align: center; }
+  .hero-d .escena { display: grid; grid-template-columns: 1fr 380px 1fr; gap: 12px; align-items: center; margin-top: 18px; }
+  .hero-d .lado { display: flex; flex-direction: column; gap: 22px; }
+  .hero-d .lado.izq { text-align: right; align-items: flex-end; }
+  .hero-d .item h4 { font-size: 14px; font-weight: 700; }
+  .hero-d .item p { font-size: 12px; color: var(--text-2); line-height: 1.45; margin-top: 2px; max-width: 220px; }
+  .hero-d .base { text-align: center; margin: -6px auto 0; }
+  .hero-d .base h4 { font-size: 14px; font-weight: 700; }
+  .hero-d .base p { font-size: 12px; color: var(--text-2); max-width: 300px; margin: 2px auto 0; line-height: 1.45; }
+  .hero-d svg.paisaje { top: 150px; height: 56%; }
+  .hero-d .velo { top: 150px; height: 56%; }
+  .hero-d .item h4, .hero-d .item p, .hero-d .base p { text-shadow: 0 1px 8px #0f1418, 0 0 2px #0f1418; }
+  .hero-d .item p, .hero-d .base p { color: #b9c4bb; }
+  .hero-d .acc { display: flex; flex-direction: column; align-items: center; margin-top: 22px; }
+  .hero-d .hcta { width: 300px; }
+  @media (max-width: 860px) { .hero-d .escena { grid-template-columns: 1fr; } .hero-d .lado.izq { text-align: left; align-items: flex-start; } .hero-d h2 { font-size: 30px; } .hero-d { padding: 28px 18px; } }
+
+  .nota { max-width: 1180px; margin: 36px auto 0; background: #f7f7f8; border: 1px solid #d9d9de; border-radius: 12px; padding: 18px 20px; font-size: 13px; line-height: 1.6; color: #3a3a40; }
+  .nota h2 { font-size: 15px; margin-bottom: 8px; }
+  .nota ul { margin-left: 18px; }
+</style>
+</head>
+<body>
+
+<!-- Ilustración abstracta reutilizable: paisaje de datos con árbol (inspirada en la 4ª imagen, dibujada de nuevo) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fbf7f" stop-opacity=".85"/><stop offset="1" stop-color="#2f4d36" stop-opacity=".25"/></linearGradient>
+    <linearGradient id="gArea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f6b4a" stop-opacity=".9"/><stop offset="1" stop-color="#16251c" stop-opacity=".4"/></linearGradient>
+    <linearGradient id="gTronco" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a5a37"/><stop offset=".5" stop-color="#c58a57"/><stop offset="1" stop-color="#8a5a37"/></linearGradient>
+    <radialGradient id="gHoja" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#c3cf8c"/><stop offset=".55" stop-color="#7c9a4f"/><stop offset="1" stop-color="#3d5a35"/></radialGradient>
+    <radialGradient id="gHoja2" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#e0c88e"/><stop offset=".6" stop-color="#b59a66"/><stop offset="1" stop-color="#7a6443"/></radialGradient>
+    <symbol id="paisaje-datos" viewBox="0 0 600 300" preserveAspectRatio="xMidYMax slice">
+      <g fill="#fff" fill-opacity=".55"><circle cx="40" cy="30" r="1.4"/><circle cx="110" cy="62" r="1"/><circle cx="170" cy="22" r="1.4"/><circle cx="250" cy="48" r="1"/><circle cx="420" cy="26" r="1.4"/><circle cx="500" cy="58" r="1"/><circle cx="560" cy="24" r="1.4"/><circle cx="470" cy="90" r="1"/></g>
+      <polygon fill="url(#gArea)" points="0,262 0,214 28,204 50,218 80,172 108,196 140,150 170,180 200,128 232,160 262,112 292,150 322,134 352,176 382,156 412,196 442,182 472,212 502,192 540,214 600,200 600,262"/>
+      <polyline fill="none" stroke="#b9dca6" stroke-width="1.6" stroke-linejoin="round" points="0,214 28,204 50,218 80,172 108,196 140,150 170,180 200,128 232,160 262,112 292,150 322,134 352,176 382,156 412,196 442,182 472,212 502,192 540,214 600,200"/>
+      <path fill="url(#gArea2)" d="M0 262 L0 236 Q80 214 160 238 T330 232 T500 240 T600 232 L600 262Z"/>
+      <!-- barras -->
+      <g opacity=".6">
+        <rect x="26" y="222" width="9" height="40" rx="1.5" fill="#8fbf7f"/><rect x="40" y="206" width="9" height="56" rx="1.5" fill="#c9a66b"/><rect x="54" y="190" width="9" height="72" rx="1.5" fill="#8fbf7f"/><rect x="68" y="214" width="9" height="48" rx="1.5" fill="#c9a66b"/><rect x="82" y="198" width="9" height="64" rx="1.5" fill="#8fbf7f"/><rect x="96" y="176" width="9" height="86" rx="1.5" fill="#c9a66b"/><rect x="110" y="204" width="9" height="58" rx="1.5" fill="#8fbf7f"/><rect x="124" y="226" width="9" height="36" rx="1.5" fill="#c9a66b"/>
+        <rect x="486" y="214" width="8" height="48" rx="1.5" fill="#8fbf7f"/><rect x="498" y="196" width="8" height="66" rx="1.5" fill="#c9a66b"/><rect x="510" y="178" width="8" height="84" rx="1.5" fill="#8fbf7f"/><rect x="522" y="160" width="8" height="102" rx="1.5" fill="#c9a66b"/><rect x="534" y="190" width="8" height="72" rx="1.5" fill="#8fbf7f"/><rect x="546" y="208" width="8" height="54" rx="1.5" fill="#c9a66b"/>
+      </g>
+      <!-- árbol -->
+      <g>
+        <path d="M322 266 C324 236 322 206 316 180 C312 164 304 154 292 142" stroke="url(#gTronco)" stroke-width="11" stroke-linecap="round" fill="none"/>
+        <path d="M318 188 C326 168 344 156 362 142" stroke="url(#gTronco)" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <path d="M324 216 C340 200 362 192 384 176" stroke="url(#gTronco)" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M304 160 C292 150 280 148 266 138" stroke="url(#gTronco)" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <g>
+          <circle cx="262" cy="128" r="26" fill="url(#gHoja)"/><circle cx="296" cy="100" r="36" fill="url(#gHoja)"/><circle cx="336" cy="86" r="40" fill="url(#gHoja)"/><circle cx="380" cy="104" r="36" fill="url(#gHoja)"/>
+          <circle cx="404" cy="138" r="26" fill="url(#gHoja)"/><circle cx="330" cy="128" r="34" fill="url(#gHoja)"/><circle cx="290" cy="138" r="26" fill="url(#gHoja2)"/><circle cx="372" cy="146" r="22" fill="url(#gHoja2)"/><circle cx="240" cy="150" r="16" fill="url(#gHoja2)"/>
+        </g>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="cabecera">
+  <h1>Combinación A + C + Bosque</h1>
+  <p class="sub">Los colores y el paisaje de tu nueva imagen (verdes de musgo, tonos arena y cobre sobre fondo oscuro) aplicados a la combinación anterior: letra con serifa de A, tarjetas redondeadas de C y la rueda de madurez. Los datos son de una <b>empresa de ejemplo</b>.</p>
+  <div class="salidas" role="list">
+    <span role="listitem"><b>1 · Aprobar</b> esta versión</span>
+    <span role="listitem"><b>2 · Elegir modo</b> oscuro o claro</span>
+    <span role="listitem"><b>3 · Ajustar</b> un color, una letra o el paisaje</span>
+    <span role="listitem"><b>4 · Volver</b> a la versión azul</span>
+  </div>
+</header>
+
+<section class="fila1" aria-label="Combinación en modo oscuro">
+
+  <div class="ref">
+    <p class="col-t">Tu imagen</p>
+    <figure><img src="docs/revisiones/referencia-4-bosque.png" alt="Imagen de referencia: paneles oscuros con árboles y gráficos"><figcaption>Referencia · colores y paisaje</figcaption></figure>
+    <div class="meta">
+      <h2>Qué tomé de cada una</h2>
+      <ul>
+        <li><b>De tu imagen nueva:</b> fondo casi negro verdoso, verde musgo y verde claro, arena y cobre, y el paisaje de gráficos con un árbol y barras.</li>
+        <li><b>De A:</b> letra con serifa para titulares y números, barras segmentadas.</li>
+        <li><b>De C:</b> tarjetas redondeadas, tarjeta héroe con el puntaje, botón grande.</li>
+        <li><b>De la rueda:</b> semicírculo de segmentos con íconos y gota central, ahora en verdes y arena.</li>
+        <li><b>Propio:</b> el árbol, las barras y los íconos están dibujados de nuevo; no son los de tu imagen.</li>
+      </ul>
+      <div class="paleta" aria-hidden="true">
+        <span style="background:#0f1418"></span><span style="background:#161c22"></span><span style="background:#e8ede6"></span><span style="background:#8fbf7f"></span><span style="background:#5f8a4f"></span><span style="background:#c9a66b"></span><span style="background:#b87b4e"></span><span style="background:#7fb3a6"></span>
+      </div>
+      <div class="espec"><p class="d">Newsreader — AaBbÑñ 0123</p><p class="b">Figtree — El veloz murciélago hindú comía feliz cardillo y kiwi.</p></div>
+    </div>
+  </div>
+
+  <div class="oscuro">
+    <p class="col-t">Resultados · móvil (oscuro)</p>
+    <div class="telefono" id="tel-oscuro">
+      <div class="statusbar"><span>9:41</span><span class="der">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg></span></div>
+      <div class="pantalla">
+        <p class="over">Empresa de ejemplo · 21 oct 2026</p>
+        <h3 class="t">Así va tu <em>sostenibilidad</em></h3>
+        <div class="heroe"><p class="hl">Puntaje general</p><p class="hn">57.2 <small>/ 100</small></p><span class="hp">En desarrollo · 37 de 40 respuestas</span>
+          <svg class="mini" width="120" height="62" viewBox="0 0 120 62" aria-hidden="true"><polyline fill="none" stroke="#b9dca6" stroke-width="1.5" stroke-linejoin="round" points="0,50 14,42 26,48 40,28 54,38 68,18 82,32 96,22 120,30"/><g fill="#8fbf7f"><rect x="78" y="46" width="5" height="16" rx="1"/><rect x="86" y="38" width="5" height="24" rx="1"/><rect x="94" y="30" width="5" height="32" rx="1"/></g><g fill="#c9a66b"><rect x="102" y="36" width="5" height="26" rx="1"/><rect x="110" y="44" width="5" height="18" rx="1"/></g></svg></div>
+        <div class="bento">
+          <div class="bt" style="--c:var(--c-amb)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.4-6"/></svg></span><span class="pt">48.9</span></div><p class="nm">Ambiental</p><p class="sb">9 de 10 preguntas</p>
+            <div class="seg"><i style="flex:3;background:var(--s1)"></i><i style="flex:3;background:var(--s2)"></i><i style="flex:2;background:var(--s3)"></i><i style="flex:1;background:var(--s4)"></i></div></div>
+          <div class="bt" style="--c:var(--c-soc)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M22 20c0-2.6-1.6-4.6-4-5.5"/></svg></span><span class="pt">61.3</span></div><p class="nm">Social</p><p class="sb">10 de 10 preguntas</p>
+            <div class="seg"><i style="flex:1;background:var(--s1)"></i><i style="flex:4;background:var(--s2)"></i><i style="flex:3;background:var(--s3)"></i><i style="flex:2;background:var(--s4)"></i></div></div>
+          <div class="bt" style="--c:var(--c-gob)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8v2h18V8Z"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></svg></span><span class="pt">52.0</span></div><p class="nm">Gobernanza</p><p class="sb">8 de 10 preguntas</p>
+            <div class="seg"><i style="flex:2;background:var(--s1)"></i><i style="flex:3;background:var(--s2)"></i><i style="flex:2;background:var(--s3)"></i><i style="flex:1;background:var(--s4)"></i></div></div>
+          <div class="bt" style="--c:var(--c-eco)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="pt">66.7</span></div><p class="nm">Económica</p><p class="sb">6 de 6 preguntas</p>
+            <div class="seg"><i style="flex:1;background:var(--s1)"></i><i style="flex:1;background:var(--s2)"></i><i style="flex:3;background:var(--s3)"></i><i style="flex:1;background:var(--s4)"></i></div></div>
+          <div class="bt ancho" style="--c:var(--c-soc)"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span><p><b>3 preguntas</b> sin información. Complétalas para afinar tu resultado.</p></div>
+        </div>
+        <div class="cta">Ver mi plan de mejora</div>
+        <nav class="tabbar" aria-label="Navegación">
+          <a class="activa" href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>Resultados</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>Diagnóstico</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg></span>Plan</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Historial</a>
+        </nav>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="oscuro">
+    <p class="col-t">Página de ventas · móvil</p>
+    <div class="hero hero-m">
+      <svg class="paisaje" viewBox="0 0 600 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#paisaje-datos"/></svg><div class="velo"></div>
+      <div class="cont">
+        <span class="badge">Diagnóstico de sostenibilidad</span>
+        <svg class="rueda" width="288" height="226" viewBox="0 0 320 250" role="img" aria-label="Rueda con las cuatro dimensiones y la cadena de valor" style="margin-top:96px">
+          <defs><filter id="sombraM" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".5"/></filter></defs>
+          <path d="M278.0 100.0 A118 118 0 0 1 258.3 165.3 L220.0 139.8 A72 72 0 0 0 232.0 100.0Z" fill="#c9a66b"/>
+          <path d="M254.7 170.4 A118 118 0 0 1 200.0 211.0 L184.4 167.7 A72 72 0 0 0 217.8 142.9Z" fill="#a8b56a"/>
+          <path d="M194.1 213.0 A118 118 0 0 1 125.9 213.0 L139.2 168.9 A72 72 0 0 0 180.8 168.9Z" fill="#7a9a52"/>
+          <path d="M120.0 211.0 A118 118 0 0 1 65.3 170.4 L102.2 142.9 A72 72 0 0 0 135.6 167.7Z" fill="#55804a"/>
+          <path d="M61.7 165.3 A118 118 0 0 1 42.0 100.0 L88.0 100.0 A72 72 0 0 0 100.0 139.8Z" fill="#3f6b4a"/>
+          <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <g stroke="#0f1418" transform="translate(240.9 117.5) scale(.85)"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></g>
+            <g stroke="#0f1418" transform="translate(206.6 166.3) scale(.85)"><path d="M12 3 3 8v2h18V8Z"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></g>
+            <g stroke="#0f1418" transform="translate(150 185) scale(.85)"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></g>
+            <g stroke="#f1f4ea" transform="translate(93.4 166.3) scale(.85)"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M22 20c0-2.6-1.6-4.6-4-5.5"/></g>
+            <g stroke="#f1f4ea" transform="translate(59.1 117.5) scale(.85)"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.4-6"/></g>
+          </g>
+          <path filter="url(#sombraM)" d="M160 6 C160 6 100 62 100 104 A60 60 0 0 0 220 104 C220 62 160 6 160 6Z" fill="#1b2126" stroke="#2f3a33" stroke-width="1"/>
+          <text x="160" y="72" text-anchor="middle" style="font-family:'Figtree',monospace;font-size:9.5px;font-weight:600" fill="#98a39a">Tu diagnóstico</text>
+          <text text-anchor="middle" style="font-family:'Newsreader',monospace;font-size:19px;font-weight:500;letter-spacing:.02em" fill="#e8ede6"><tspan x="160" y="94">SABE DÓNDE</tspan><tspan x="160" y="114">ESTÁ TU</tspan><tspan x="160" y="134">EMPRESA.</tspan></text>
+        </svg>
+        <div class="leyenda">
+          <p><i style="background:#3f6b4a"></i>Ambiental</p><p><i style="background:#c9a66b"></i>Económica</p>
+          <p><i style="background:#55804a"></i>Social</p><p><i style="background:#a8b56a"></i>Gobernanza</p>
+          <p style="grid-column:1/-1"><i style="background:#7a9a52"></i>Cadena de valor (en la base)</p>
+        </div>
+        <p class="sub"><b>Un diagnóstico, un plan y tu historial.</b> Todo ordenado por empresa, sin empezar desde cero cada vez.</p>
+        <div class="hcta">Iniciar mi diagnóstico gratis</div>
+        <p class="prueba" style="width:100%">7 días de prueba · sin tarjeta</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="oscuro" aria-label="Página de ventas en escritorio">
+  <p class="col-t" style="margin-top:40px">Página de ventas · escritorio (oscuro)</p>
+  <div class="hero hero-d">
+    <svg class="paisaje" viewBox="0 0 600 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#paisaje-datos"/></svg><div class="velo"></div>
+    <div class="cont">
+      <div class="cab">
+        <span class="badge">Diagnóstico de sostenibilidad para empresas</span>
+        <h2>Sabe dónde está tu empresa y qué <em>mejorar primero</em></h2>
+        <p class="sub"><b>Un diagnóstico, un plan y tu historial.</b> Responde las cuatro dimensiones, mira tus brechas y sigue tu avance sin empezar de cero cada vez.</p>
+      </div>
+      <div class="escena" style="margin-top:120px">
+        <div class="lado izq">
+          <div class="item"><h4>Ambiental</h4><p>Descubre cómo gestionas energía, agua, residuos y tu impacto en el entorno.</p></div>
+          <div class="item"><h4>Social</h4><p>Revisa el bienestar de tu equipo, la seguridad y la relación con tu comunidad.</p></div>
+        </div>
+        <svg class="rueda" width="380" height="297" viewBox="0 0 320 250" role="img" aria-label="Rueda con las cuatro dimensiones y la cadena de valor">
+          <defs><filter id="sombraD" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity=".5"/></filter></defs>
+          <path d="M278.0 100.0 A118 118 0 0 1 258.3 165.3 L220.0 139.8 A72 72 0 0 0 232.0 100.0Z" fill="#c9a66b"/>
+          <path d="M254.7 170.4 A118 118 0 0 1 200.0 211.0 L184.4 167.7 A72 72 0 0 0 217.8 142.9Z" fill="#a8b56a"/>
+          <path d="M194.1 213.0 A118 118 0 0 1 125.9 213.0 L139.2 168.9 A72 72 0 0 0 180.8 168.9Z" fill="#7a9a52"/>
+          <path d="M120.0 211.0 A118 118 0 0 1 65.3 170.4 L102.2 142.9 A72 72 0 0 0 135.6 167.7Z" fill="#55804a"/>
+          <path d="M61.7 165.3 A118 118 0 0 1 42.0 100.0 L88.0 100.0 A72 72 0 0 0 100.0 139.8Z" fill="#3f6b4a"/>
+          <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <g stroke="#0f1418" transform="translate(240.9 117.5) scale(.85)"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></g>
+            <g stroke="#0f1418" transform="translate(206.6 166.3) scale(.85)"><path d="M12 3 3 8v2h18V8Z"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></g>
+            <g stroke="#0f1418" transform="translate(150 185) scale(.85)"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></g>
+            <g stroke="#f1f4ea" transform="translate(93.4 166.3) scale(.85)"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M22 20c0-2.6-1.6-4.6-4-5.5"/></g>
+            <g stroke="#f1f4ea" transform="translate(59.1 117.5) scale(.85)"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.4-6"/></g>
+          </g>
+          <path filter="url(#sombraD)" d="M160 6 C160 6 100 62 100 104 A60 60 0 0 0 220 104 C220 62 160 6 160 6Z" fill="#1b2126" stroke="#2f3a33" stroke-width="1"/>
+          <text x="160" y="72" text-anchor="middle" style="font-family:'Figtree',monospace;font-size:9.5px;font-weight:600" fill="#98a39a">Tu diagnóstico</text>
+          <text text-anchor="middle" style="font-family:'Newsreader',monospace;font-size:19px;font-weight:500;letter-spacing:.02em" fill="#e8ede6"><tspan x="160" y="94">SABE DÓNDE</tspan><tspan x="160" y="114">ESTÁ TU</tspan><tspan x="160" y="134">EMPRESA.</tspan></text>
+        </svg>
+        <div class="lado">
+          <div class="item"><h4>Gobernanza</h4><p>Mira tus políticas, tu ética, tus riesgos y cómo tomas decisiones.</p></div>
+          <div class="item"><h4>Económica</h4><p>Encuentra dónde reducir desperdicios y usar mejor tus recursos.</p></div>
+        </div>
+      </div>
+      <div class="base"><h4>Cadena de valor, en la base</h4><p>Proveedores, clientes y operación atraviesan las cuatro dimensiones. No entra en el puntaje general.</p></div>
+      <div class="acc"><div class="hcta">Iniciar mi diagnóstico gratis</div><p class="prueba">7 días de prueba · sin tarjeta</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="fila1 claro" aria-label="Versión clara" style="margin-top:48px">
+  <div style="width:100%;max-width:360px">
+    <p class="col-t">Misma paleta en modo claro</p>
+    <div class="meta"><h2>Si prefieres un fondo claro</h2><p>Es la misma combinación con los colores de tu imagen sobre fondo claro: verde musgo como color principal, arena y cobre como apoyo. Sirve si crees que tu cliente trabaja de día, imprime informes o prefiere una pantalla luminosa. El paisaje de arriba se mantiene oscuro en la página de ventas en ambos casos.</p></div>
+  </div>
+  <div>
+    <p class="col-t">Resultados · móvil (claro)</p>
+    <div class="telefono" id="tel-claro"></div>
+  </div>
+</section>
+
+<section class="nota">
+  <h2>Qué es de ejemplo y qué falta</h2>
+  <ul>
+    <li>El paisaje con el árbol y las barras es una ilustración mía, dibujada con formas simples. Si más adelante quieres una versión más rica (como las imágenes en 3D de tu referencia), se puede generar o encargar una ilustración y reemplazar esta sin tocar el resto.</li>
+    <li>Los textos son de muestra. El texto final de la página de ventas sale de la ficha del cliente ideal, cuando la apruebes.</li>
+    <li>Cuando apruebes el estilo, calculo el contraste de cada color de texto sobre su fondo antes de cerrar la ficha de diseño.</li>
+  </ul>
+</section>
+
+<script>
+  // La versión clara reutiliza exactamente la misma pantalla; solo cambian las variables de color.
+  (function () {
+    var o = document.getElementById('tel-oscuro'), c = document.getElementById('tel-claro');
+    if (o && c) c.innerHTML = o.innerHTML;
+  })();
+</script>
+</body>
+</html>
