@@ -17,7 +17,7 @@
 - Problema: cada cliente entrega datos distintos y ella reconstruye diagnósticos e informes desde cero.
 - Test de urgencia: ¿le pasó esta semana? PENDIENTE · ¿le costó tiempo? PENDIENTE · ¿ya intentó resolverlo? SÍ (Excel/plantillas/IA, según documentos)
 - COSTO DE LA INACCIÓN: NO CUANTIFICADO (falta: horas/mes por cliente → pregunta 1 del guion)
-- DISPARADOR DE COMPRA: PENDIENTE (candidato: un cliente nuevo o una renovación de contrato)
+- DISPARADOR DE COMPRA (hipótesis del análisis de razones de compra, 2026-10-21): recibir un cuestionario o solicitud de información de sostenibilidad de un cliente, banco o licitación; o empezar con un cliente nuevo. Razones de compra en orden: 1 ahorrar tiempo · 2 ahorrar dinero · 3 prepararse para esos pedidos (ver docs/producto/PROPUESTA-DE-VALOR.md)
 
 ## Dolores (hipótesis, SIN fuente real)
 1. ★ (superficial) "Estoy haciendo el mismo trabajo una y otra vez"
@@ -31,14 +31,14 @@
 2. (tangible) "Toda la información de cada cliente en un solo lugar"
 3. (emocional) "Entregar sin miedo a errores"
 4. (emocional) "Que mis clientes renueven porque ven avances"
-5. (identidad) "Ser vista como la consultora profesional y ordenada"
+5. (identidad) "Ser vista como alguien profesional y ordenada, y que la dirección o mis clientes vean avances"
 
 ## Voice of customer REAL (Fuente 2)
 - Sin frases de clientes reales. Único dato externo parcial: encuesta de QuickESG (proveedor, anecdótica) — primer dolor de consultores: integrar datos de varios departamentos; segundo: digitar en Excel (linkedin.com/company/quickesg, 2026-10-20).
 
 ## Consciencia y sofisticación
 - Consciencia: solución-aware (tu investigación, no verificada con usuarios). Sofisticación: etapa 3–4 probable (varios competidores prometen "diagnóstico automático"); NO verificado.
-- Ángulo: mecanismo al frente (diagnóstico → plan → historial por cliente) + ahorro de tiempo. No vender "salvar el planeta" ni cumplimiento normativo.
+- Ángulo: titular de ahorro de tiempo («Deja de reconstruir tus datos cada vez que te piden un informe») + mecanismo (diagnosticar → priorizar → demostrar avance) + dos puertas de entrada (interno: pedidos de clientes; externo: varias empresas). No vender "salvar el planeta", cumplimiento normativo, "evita perder contratos" ni "sin consultores". Ver docs/producto/PROPUESTA-DE-VALOR.md
 
 ## Objeciones (de tus documentos; respuesta propuesta)
 1. "Ya tengo mis plantillas" → la app no reemplaza tu criterio: acumula historial por cliente → FAQ/landing
