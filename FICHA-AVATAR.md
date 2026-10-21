@@ -1,6 +1,6 @@
 # FICHA DE AVATAR — SustentaESG
 
-- Estado: **POR APROBAR** — base: tus documentos de investigación. Las frases son hipótesis de esos documentos, no citas de clientes: el copy NO las presenta como testimonios ni como cifras reales. Se aprueba cuando tú la confirmes.
+- Estado: **APROBADA (2026-10-21)** — base: tus documentos de investigación. Las frases son hipótesis de esos documentos, no citas de clientes: el copy NO las presenta como testimonios ni como cifras reales. Se aprueba cuando tú la confirmes.
 
 ## El avatar (cliente ideal — UNA persona)
 - Quién es (aclarado por el usuario 2026-10-21): la persona que lleva el tema de sostenibilidad de una o varias empresas, sea INTERNA (de la empresa) o EXTERNA (consultora). Mismo dolor, mismo producto; cambia cuántas empresas gestiona.
@@ -57,4 +57,4 @@
 
 ## Cierre
 - INVENTARIO DE PRUEBA DÍA-1: ninguno (sin betas, sin resultados, sin testimonios). La landing no puede tener testimonios ni cifras de clientes.
-- Fecha: 2026-10-21 · Aprobada por el usuario: PENDIENTE (presentada en simple)
+- Fecha: 2026-10-21 · Aprobada por el usuario: SÍ (2026-10-21)

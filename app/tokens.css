@@ -1,0 +1,65 @@
+/* SustentaESG — tokens de la página de ventas (kit de landing).
+   Fuente: FICHA-ARTE.md aprobada 2026-10-21 (modo oscuro «bosque»).
+   Las superficies siguen los tres niveles del kit: base / elevada / hundida. */
+
+:root {
+  --bg: #0f1418;
+  --surface: #161c22;
+  --surface-2: #0b0f12;
+
+  --text-primary: #e8ede6;
+  --text-secondary: #98a39a;
+  --text-tertiary: #838f87;   /* ≥5,1:1 sobre las tres superficies (medido 2026-10-21) */
+
+  --accent: #8fbf7f;
+  --accent-2: #c9a66b;        /* arena: 2ª nota de la ficha */
+
+  --radius-card: 14px;
+  --radius-button: 10px;
+
+  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-body: var(--font-figtree), 'Segoe UI', sans-serif;
+
+  --shadow-1: 0 1px 2px rgb(3 8 6 / 0.5);
+  --shadow-2: 0 12px 32px -12px rgb(3 8 6 / 0.7);
+
+  --chip-bg: color-mix(in oklab, var(--accent) 10%, transparent);
+}
+
+/* Ilustración de la app (rueda de madurez + paisaje de datos). Fuente: FICHA-ARTE.md y referencias 3 y 4. */
+:root {
+  --rueda-1: #3f6b4a;
+  --rueda-2: #55804a;
+  --rueda-3: #7a9a52;
+  --rueda-4: #a8b56a;
+  --rueda-5: #c9a66b;
+  --on-rueda-claro: #f1f4ea;
+  --pais-cielo-1: #17261e;
+  --pais-cielo-2: #121b18;
+  --pais-area-top: #8fbf7f;
+  --pais-area-bottom: #2f4d36;
+  --pais-colina-top: #3f6b4a;
+  --pais-colina-bottom: #16251c;
+  --pais-linea: #b9dca6;
+  --hoja-1: #c3cf8c;
+  --hoja-2: #7c9a4f;
+  --hoja-3: #3d5a35;
+  --hoja-arena-1: #e0c88e;
+  --hoja-arena-2: #b59a66;
+  --hoja-arena-3: #7a6443;
+  --tronco-1: #8a5a37;
+  --tronco-2: #c58a57;
+  --gota: #1b2126;
+  --gota-borde: #2f3a33;
+  /* Bloque final: en el tema oscuro no se invierte a crema; usa el verde profundo de la tarjeta héroe */
+  --cta-fondo: #1a2c20;
+  --cta-texto: #f1f4ea;
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}

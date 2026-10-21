@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@theme inline {
+  --font-sans: var(--font-figtree);
+  --font-serif: var(--font-newsreader);
+}
