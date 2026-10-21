@@ -96,3 +96,9 @@ Tu OK a la Etapa 0 → Etapa 1 (identidad visual): pregunta de referencia + 3 es
 - Revisión independiente (revisor-visual): 1.ª ronda NO LISTA (28/40 · 15/20 · copy 14/20) → corregido: Problema 3 preguntas, Agitación 2 frases sin caja duplicada, datos reales del producto en la solución (≈40 preguntas), ambos botones de la oferta iguales, garantía con secuencia clara sin nombrar la pasarela, flechas de teclado en el selector. 2.ª ronda en curso. Veredicto: docs/revisiones/landing-veredicto.md.
 - Pendientes (anotados, no bloquean esta etapa): ⚠️ imágenes del carrusel = vistas previas del diseño (reemplazar por capturas reales al terminar la app, paso obligatorio) · ⚠️ correo de soporte soporte@sustentaesg.com es provisional (depende de comprar el dominio) · ⚠️ garantía de 7 días y comisión: configurar y verificar en Hotmart antes de publicar · ⚠️ páginas legales en borrador: revisión de abogado (Ley 1581) · ⚠️ precios US$9/60 y 15/70 son hipótesis.
 - npm outdated (2026-10-21): majors NO adoptadas a propósito: eslint 10, typescript 7, @types/node 26 (se mantienen las del scaffold hasta tener la app construida). react 19.3.1 es parche. npm audit (producción): 0 vulnerabilidades.
+
+
+## Problemas conocidos
+- garantía: la página promete la Garantía del Primer Diagnóstico (14 días desde la compra; prueba de 7 días en la app). Plazos anotados en FICHA-MERCADO.md (Prueba elegida: 7 · Garantía elegida: 14) pero SIN verificar en Hotmart: se verifica y configura antes de publicar; si Hotmart no lo permite, se quita la garantía del copy. Bloquea PUBLICAR, no la construcción.
+- FICHA-MERCADO: plazos de garantía de Hotmart, comisión y comportamiento de PSE sin verificar (requiere cuenta de Hotmart).
+- direcciones-abc / vista-previa / veredicto: la revisión independiente de la landing sigue en NO LISTA (3.ª ronda pendiente) — ver docs/revisiones/landing-veredicto.md.

@@ -7,6 +7,7 @@
 // (tupla en el tipo: ni 2 ni 4) + antes/después opcional. Pasos entran
 // escalonados (whileInView + stagger, reduced-motion respetado).
 
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { Accent, Hairline, Kicker, SectionShell, useReveal, VIEWPORT_ONCE } from './ui';
 import { MarkedCopy, warnCopy } from './MarkedCopy';
@@ -36,6 +37,8 @@ export interface SolucionProps {
     labelDespues: string;
     despues: string;
   };
+  /** Ejemplo de resultado (prueba concreta del mecanismo), rotulado como ejemplo por quien lo pasa. */
+  ejemplo?: ReactNode;
   id?: string;
 }
 
@@ -46,6 +49,7 @@ export function Solucion({
   bigIdeaMarked,
   pasos,
   antesDespues,
+  ejemplo,
   id,
 }: SolucionProps) {
   warnCopy('Solución → título', tituloMarked, 8);
@@ -99,6 +103,8 @@ export function Solucion({
             </motion.li>
           ))}
         </ol>
+
+        {ejemplo && <motion.div variants={item} className="mt-10">{ejemplo}</motion.div>}
 
         {antesDespues && (
           <motion.div variants={item} className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">

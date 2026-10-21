@@ -10,7 +10,7 @@
 - H1: Deja de [acento]reconstruir tus datos[/acento] de sostenibilidad  *(7 palabras)*
 - Subtítulo: Tu [b]Rueda de Madurez[/b] muestra qué tienes, qué te falta y qué hacer primero.  *(14 palabras)*
 - CTA: Iniciar mi diagnóstico gratis
-- Franja: 7 días de prueba · sin tarjeta · un espacio por empresa
+- Franja: ESG: ambiental, social y de gobernanza · 7 días gratis · sin tarjeta
 - Visual: la Rueda de Madurez sobre el paisaje de datos (imagen propia de la app)
 
 ## 2. PROBLEMA  (traza: dolores 1, 2, 6 — se recortó de 5 a 3 preguntas por redundancia)
@@ -22,7 +22,7 @@
 - Cada pedido de información te obliga a [b]volver a juntar los mismos datos[/b].
 - Mientras buscas la última versión, [acento]se va el tiempo[/acento] que podrías dedicar a mejorar.
 - Las plantillas guardan datos, pero [b]no te dicen qué falta ni qué hacer primero[/b].
-(Se quitó la caja «Hoy / Si nada cambia»: el contraste vive solo en la solución, en «Antes / Después».)
+(Se mantienen 3 frases. Se quitó la caja «Hoy / Si nada cambia»: el contraste vive solo en la solución, en «Antes / Después».)
 
 ## 4. SOLUCIÓN  (traza: Big Idea + deseos 2 y 3 · mecanismo en 3 pasos reales de la app)
 - Título: Tu sostenibilidad, [acento]ordenada una sola vez[/acento]
@@ -51,7 +51,7 @@
 
 ## 7. GARANTÍA  (traza: miedo a gastar en otro software que no use)
 - Nombre: la Garantía del Primer Diagnóstico
-- Condición: Pruebas 7 días gratis y, solo si decides pagar, tienes 7 días más para pedir tu reembolso. [b]Si tu primer diagnóstico no te sirve, te devolvemos tu dinero[/b]. Sin preguntas.
+- Condición: Pruebas 7 días gratis y, solo si decides pagar, tienes 14 días para pedir tu reembolso. [b]Si tu primer diagnóstico no te sirve, te devolvemos tu dinero[/b]. Sin preguntas.
 - Piso: Un correo basta para pedirlo  *(⚠️ configurar y verificar la garantía de 7 días en Hotmart antes de publicar; el nombre de la pasarela solo aparece en Reembolsos)*
 
 ## 8. FAQ  (traza: objeciones 1–6 de la ficha + precio)

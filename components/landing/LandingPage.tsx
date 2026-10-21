@@ -5,6 +5,7 @@
 
 import { FileSpreadsheet, Repeat, SearchX } from 'lucide-react';
 import { Hero } from './Hero';
+import { EjemploResultado } from './EjemploResultado';
 import { HeroVisual } from './HeroVisual';
 import { Problema } from './Problema';
 import { Agitacion } from './Agitacion';
@@ -28,7 +29,7 @@ export function LandingPage() {
         subtitleMarked="Tu [b]Rueda de Madurez[/b] muestra qué tienes, qué te falta y qué hacer primero."
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
-        socialProof={<span>7 días de prueba · sin tarjeta · un espacio por empresa</span>}
+        socialProof={<span>ESG: ambiental, social y de gobernanza · 7 días gratis · sin tarjeta</span>}
         visual={<HeroVisual />}
       />
 
@@ -61,6 +62,7 @@ export function LandingPage() {
           { titulo: 'Prioriza', detalle: 'Ve tu puntaje por dimensión, tus brechas y un plan con responsable y fecha.' },
           { titulo: 'Demuestra avance', detalle: 'Actualiza cuando quieras y compara tus resultados entre periodos.' },
         ]}
+        ejemplo={<EjemploResultado />}
         antesDespues={{
           labelAntes: 'Antes',
           antes: 'Datos en varios archivos, versiones sueltas y un informe armado a las carreras.',
@@ -90,7 +92,7 @@ export function LandingPage() {
       {/* 7. GARANTÍA */}
       <Garantia
         nombre="la Garantía del Primer Diagnóstico"
-        condicionMarked="Pruebas 7 días gratis y, solo si decides pagar, tienes 7 días más para pedir tu reembolso. [b]Si tu primer diagnóstico no te sirve, te devolvemos tu dinero[/b]. Sin preguntas."
+        condicionMarked="Pruebas 7 días gratis y, solo si decides pagar, tienes 14 días para pedir tu reembolso. [b]Si tu primer diagnóstico no te sirve, te devolvemos tu dinero[/b]. Sin preguntas."
         pisoLegal="Un correo basta para pedirlo"
       />
 
@@ -142,6 +144,7 @@ export function LandingPage() {
       {/* 10. FOOTER LEGAL — todas las páginas enlazadas existen */}
       <FooterLegal
         appName={APP_NAME}
+        logo={<span aria-hidden="true" className="size-6 rounded-[8px] bg-[var(--accent)]" />}
         soporteEmail={SOPORTE_EMAIL}
         anio={ANIO_COPYRIGHT}
         enlaces={[

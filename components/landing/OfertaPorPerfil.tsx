@@ -6,7 +6,7 @@
 
 import { useState } from 'react';
 import { Oferta, type OfertaProps } from './Oferta';
-import { CTA_HREF, TRIAL_DIAS } from '@/lib/site';
+import { CTA_HREF, CTA_LABEL, TRIAL_DIAS } from '@/lib/site';
 
 type Perfil = 'empresa' | 'consultor';
 
@@ -19,7 +19,7 @@ const PLANES: Record<Perfil, Pick<OfertaProps, 'anual' | 'mensual'>> = {
       totalAnual: 'Se cobra US$60/año',
       ahorro: '5 meses gratis',
       descomposicionDia: 'menos de US$0,17 al día',
-      ctaLabel: 'Empezar mis 7 días gratis',
+      ctaLabel: CTA_LABEL,
       ctaHref: CTA_HREF,
       features: [
         'Diagnóstico completo de las cuatro dimensiones',
@@ -31,7 +31,7 @@ const PLANES: Record<Perfil, Pick<OfertaProps, 'anual' | 'mensual'>> = {
     mensual: {
       nombre: 'Mensual',
       precioMes: 'US$9',
-      ctaLabel: 'Empezar mis 7 días gratis',
+      ctaLabel: CTA_LABEL,
       ctaHref: CTA_HREF,
       features: [
         'Diagnóstico completo de las cuatro dimensiones',
@@ -49,7 +49,7 @@ const PLANES: Record<Perfil, Pick<OfertaProps, 'anual' | 'mensual'>> = {
       totalAnual: 'Se cobra US$70/año',
       ahorro: '7 meses gratis',
       descomposicionDia: 'menos de US$0,20 al día',
-      ctaLabel: 'Empezar mis 7 días gratis',
+      ctaLabel: CTA_LABEL,
       ctaHref: CTA_HREF,
       features: [
         'Todo lo del plan Empresa',
@@ -61,7 +61,7 @@ const PLANES: Record<Perfil, Pick<OfertaProps, 'anual' | 'mensual'>> = {
     mensual: {
       nombre: 'Mensual',
       precioMes: 'US$15',
-      ctaLabel: 'Empezar mis 7 días gratis',
+      ctaLabel: CTA_LABEL,
       ctaHref: CTA_HREF,
       features: [
         'Todo lo del plan Empresa',

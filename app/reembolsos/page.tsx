@@ -13,7 +13,7 @@ export default function Reembolsos() {
           titulo: 'La Garantía del Primer Diagnóstico',
           contenido: (
             <p>
-              Si pagas y tu primer diagnóstico no te sirve, escríbenos dentro de los primeros 7 días desde tu compra
+              Si pagas y tu primer diagnóstico no te sirve, escríbenos dentro de los primeros 14 días desde tu compra
               y te devolvemos tu dinero, sin preguntas.
             </p>
           ),

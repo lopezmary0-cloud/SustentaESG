@@ -34,7 +34,10 @@
 ## 4. PRUEBA Y GARANTÍA
 - Hotmart permite planes con prueba gratuita ("gratis" o "test-drive" con primer cobro al final) | help.hotmart.com | 2026-10-20. Si exige tarjeta: NO CONFIRMADO.
 - **Decisión:** prueba de 7 días DENTRO de la app (sin tarjeta, sin cobro automático — lo pide tu Contexto.docx), antes de cualquier compra en Hotmart. La duración queda como variable configurable.
-- Garantía: plazos que Hotmart permite: NO VERIFICADO (se confirma en el checkout real, ver 18). Regla: la garantía arranca con la compra, así que no choca con la prueba.
+- Prueba elegida: 7 días (dentro de la app, sin tarjeta y sin cobro automático; antes de cualquier compra).
+- Garantía elegida: 14 días (corre desde la compra; decisión de Claude, informada al usuario el 2026-10-21; ajustable).
+- Comprobación (regla de 18): garantía 14 > prueba 7 → SÍ.
+- ⚠️ SIN VERIFICAR: que Hotmart permita configurar 14 días de garantía y desde cuándo cuenta (adhesión o primer cobro). Se confirma en el panel de Hotmart ANTES de publicar. Si no lo permite, la garantía se QUITA del copy (regla de 18) o se ajusta el plazo al máximo permitido que supere la prueba.
 - ⚠️ 7 días puede ser corto: llenar ~40 preguntas con datos de un cliente toma más. Si en la beta pocos terminan el diagnóstico en 7 días, probar 14.
 
 ## 5. CONVERSIÓN ESPERABLE
