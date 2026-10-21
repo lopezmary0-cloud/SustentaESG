@@ -67,7 +67,6 @@ export function LandingPage() {
       />
 
       {/* 5. LA APP POR DENTRO — vistas previas del diseño (la app se está construyendo) */}
-      <div className="pb-16 md:pb-0">
       <AppPorDentro
         kicker="VISTAS PREVIAS DEL DISEÑO"
         tituloMarked="Así se verá [acento]tu diagnóstico[/acento]"
@@ -81,7 +80,6 @@ export function LandingPage() {
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
       />
-      </div>
 
       {/* 6. OFERTA — anual primero, prueba en ambos planes */}
       <OfertaPorPerfil />
