@@ -51,3 +51,11 @@
 
 ## Próximo paso
 Tu OK a la Etapa 0 → Etapa 1 (identidad visual): pregunta de referencia + 3 estilos.
+
+## Etapa 1 — Identidad visual (en curso, 2026-10-21)
+- Ruta de diseño: **réplica de referencia** (el usuario envió 2 capturas de la Evaluación de Impacto B de B Lab).
+- Entregado: `replica-fiel.html` (móvil + escritorio, captura al lado). Capturas: docs/revisiones/replica-fiel-375.png y replica-fiel-escritorio.png. Referencias archivadas: docs/revisiones/referencia-1-lista.png y referencia-2-tarjetas.png.
+- Extracción (muestreo de píxeles de la captura 1): modo claro; fondo #FFFFFF; separadores #E0E0E0; pista de barra #DDDDDD; naranja #ED6C24; morado #7D60A9; verde #58B15F; verde azulado #287F6E; azul acero del botón ~#3F7FA6 (estimado, captura 2 oscurecida); texto #333/#555/#777; sans tipo Open Sans; radios 2 px; barras píldora; sombras suaves; ilustraciones planas de paisaje por área.
+- Color por dimensión (decisión mía): Ambiental verde · Social morado · Gobernanza naranja · Económica azul · Cadena de valor verde azulado.
+- Pendiente: aprobación del usuario → tour de la app (vista-previa-app.html) → FICHA-ARTE.md y tokens.
+- ⚠️ El mockup está a escala (310 px): las letras pequeñas se ven de 7–8 px solo en la maqueta; en la app real las etiquetas serán ≥11 px (regla del SO).
