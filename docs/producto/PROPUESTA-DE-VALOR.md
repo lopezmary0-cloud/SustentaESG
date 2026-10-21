@@ -67,5 +67,5 @@ La página de ventas usa un titular común (el de tiempo) y dos bloques claros, 
 - En Colombia el reporte de sostenibilidad es voluntario y no genera sanción (Supersociedades, 21-nov-2025). Por eso no se vende miedo legal.
 - La Comisión Europea publicó el 30-jul-2025 la Recomendación (EU) 2025/1710 con el estándar voluntario VSME para pymes, pensado para que respondan a solicitudes de información de grandes empresas y bancos. No es obligatorio y se presenta como medida provisional. Solo es relevante si una pyme colombiana abastece a compradores europeos. Alinear la app a VSME sería una versión posterior; hoy no se construye ni se menciona en la página.
 
-## Cómo saber si funciona sin entrevistas (propuesta)
+## Cómo saber si funciona (propuesta)
 Medir en la prueba de 7 días: cuántas personas activan la prueba, cuántas terminan el diagnóstico, cuántas vuelven al día 3 y al día 7, cuántas llegan a la pantalla de planes y cuántas pagan. Eso responde si el problema es urgente y si el precio está bien, con datos de uso y no con opiniones.
