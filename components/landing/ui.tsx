@@ -139,6 +139,40 @@ export function useReveal(stagger = 0.07): { contenedor: Variants; item: Variant
 /* Props estándar para el contenedor con reveal — evita repetir en cada sección. */
 export const VIEWPORT_ONCE = { once: true, amount: 0.2 } as const;
 
+/* ── useEstadoCta — feedback de todos los CTA que abren otra página ──────────
+   Al tocar: «Abriendo…» inmediato y sin doble toque. Si a los 8 s no abrió (sin conexión),
+   vuelve a reposo y avisa qué hacer; el aviso se borra solo a los 6 s. Si la persona vuelve
+   atrás (página restaurada de la caché del navegador), el botón vuelve a reposo. */
+type EstadoCta = 'reposo' | 'abriendo' | 'fallo';
+
+export function useEstadoCta() {
+  const [estado, setEstado] = useState<EstadoCta>('reposo');
+
+  useEffect(() => {
+    if (estado === 'reposo') return;
+    const t = setTimeout(() => setEstado(estado === 'abriendo' ? 'fallo' : 'reposo'), estado === 'abriendo' ? 8000 : 6000);
+    return () => clearTimeout(t);
+  }, [estado]);
+
+  useEffect(() => {
+    const alVolver = (e: PageTransitionEvent) => {
+      if (e.persisted) setEstado('reposo');
+    };
+    window.addEventListener('pageshow', alVolver);
+    return () => window.removeEventListener('pageshow', alVolver);
+  }, []);
+
+  const alTocar = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (estado === 'abriendo') {
+      e.preventDefault();
+      return;
+    }
+    setEstado('abriendo');
+  };
+
+  return { estado, alTocar };
+}
+
 /* ── <CtaButton> — el CTA vivo del kit: ≥52px, whileTap 0.97, sombra tintada.
    El texto sobre acento usa --bg: si tu FICHA-ARTE rompe el contraste AA ahí,
    ajusta los tokens, no el componente. ── */
@@ -153,14 +187,7 @@ export function CtaButton({
   alto?: 52 | 56;
   fullMobile?: boolean;
 }) {
-  // Estado de carga: feedback inmediato al tocar, sin doble toque. Si la navegación no llega
-  // a ocurrir (sin conexión), a los 8 s el botón vuelve a su estado normal y avisa qué hacer.
-  const [estado, setEstado] = useState<'reposo' | 'abriendo' | 'fallo'>('reposo');
-  useEffect(() => {
-    if (estado !== 'abriendo') return;
-    const t = setTimeout(() => setEstado('fallo'), 8000);
-    return () => clearTimeout(t);
-  }, [estado]);
+  const { estado, alTocar } = useEstadoCta();
 
   return (
     <span className={`inline-flex flex-col items-center ${fullMobile ? 'w-full sm:w-auto' : ''}`}>
@@ -168,13 +195,7 @@ export function CtaButton({
         whileTap={{ scale: 0.97 }}
         href={href}
         aria-busy={estado === 'abriendo'}
-        onClick={(e) => {
-          if (estado === 'abriendo') {
-            e.preventDefault();
-            return;
-          }
-          setEstado('abriendo');
-        }}
+        onClick={alTocar}
         className={`inline-flex w-full items-center justify-center whitespace-nowrap rounded-[var(--radius-button)] bg-[var(--accent)] px-4 text-center text-[16px] font-semibold text-[var(--bg)] shadow-[0_8px_30px_color-mix(in_oklab,var(--accent)_25%,transparent)] transition-colors duration-150 hover:bg-[color-mix(in_oklab,var(--accent)_88%,var(--text-primary))] sm:w-auto sm:px-8 sm:text-[17px] [touch-action:manipulation] ${
           alto === 56 ? 'h-14' : 'h-[52px]'
         }`}
@@ -211,6 +232,7 @@ export function StickyCtaMobile({
   ctaFinalId?: string;
 }) {
   const reduce = useReducedMotion();
+  const { estado, alTocar } = useEstadoCta();
   const [heroVisible, setHeroVisible] = useState(true);
   const [ofertaVisible, setOfertaVisible] = useState(false);
   const [ofertaVista, setOfertaVista] = useState(false);
@@ -258,10 +280,17 @@ export function StickyCtaMobile({
           <motion.a
             whileTap={{ scale: 0.97 }}
             href={ofertaVista ? href : `#${ofertaId}`}
-            className="flex h-12 w-full items-center justify-center rounded-[var(--radius-button)] bg-[var(--accent)] text-[16px] font-semibold text-[var(--bg)] [touch-action:manipulation]"
+            aria-busy={ofertaVista && estado === 'abriendo'}
+            onClick={ofertaVista ? alTocar : undefined}
+            className="flex h-[52px] w-full items-center justify-center whitespace-nowrap rounded-[var(--radius-button)] bg-[var(--accent)] text-[16px] font-semibold text-[var(--bg)] [touch-action:manipulation]"
           >
-            {ofertaVista ? labelComercial : labelPre}
+            {ofertaVista ? (estado === 'abriendo' ? 'Abriendo…' : labelComercial) : labelPre}
           </motion.a>
+          {ofertaVista && estado === 'fallo' && (
+            <p role="alert" className="mt-2 text-center text-[13px] text-[var(--text-secondary)]">
+              No pudimos abrirlo. Revisa tu conexión y vuelve a tocar el botón.
+            </p>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
