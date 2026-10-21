@@ -59,3 +59,6 @@ Tu OK a la Etapa 0 → Etapa 1 (identidad visual): pregunta de referencia + 3 es
 - Color por dimensión (decisión mía): Ambiental verde · Social morado · Gobernanza naranja · Económica azul · Cadena de valor verde azulado.
 - Pendiente: aprobación del usuario → tour de la app (vista-previa-app.html) → FICHA-ARTE.md y tokens.
 - ⚠️ El mockup está a escala (310 px): las letras pequeñas se ven de 7–8 px solo en la maqueta; en la app real las etiquetas serán ≥11 px (regla del SO).
+- 2026-10-21: el usuario descartó la réplica ("se ve muy igual") → ruta propuesta por Claude (A/B/C). Líderes mirados con navegador: Coolset (serif fina Reckless + navy #060851, barras segmentadas por estado), Sweep (grotesca Maison Neue, azul #283FFF, 8 px, degradés pastel), Greenly (grotesca Pangea, verde bosque #031F18). TrackZero: sitio no accesible. Gigantes (Linear/Stripe/Notion): solo conocimiento, sin consulta.
+- Opciones entregadas en `direcciones-abc.html`: A Informe editorial (Newsreader+Hanken, claro, barras segmentadas) · B Bosque de datos (Geologica+Wix Madefor, oscuro derivado, gráfico de araña) · C Tablero luminoso (Schibsted Grotesk+Figtree, azul eléctrico, bento). Capturas: docs/revisiones/direcciones-abc-escritorio.png. Fuentes verificadas cargadas (6/6), sin desbordes.
+- Pendiente: elección del usuario → tour de la app → FICHA-ARTE.md + tokens.

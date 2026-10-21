@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es" data-kit="abc-v2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direcciones de arte A/B/C — SustentaESG</title>
+<!-- KIT-ABC-V2: este archivo nace de plantillas-codigo/direcciones-abc/plantilla.html (Regla Dura #0 del 54).
+     El marcador data-kit="abc-v2" del <html> NO se borra (lo verifica el hook).
+     Fallback-trampa: cada familia lleva `monospace` — si una fuente no carga, se nota. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Hanken+Grotesk:wght@400..700&family=Geologica:wght@400..700&family=Wix+Madefor+Text:wght@400..700&family=Schibsted+Grotesk:wght@400..800&family=Figtree:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background:
+      radial-gradient(1100px 520px at 12% -6%, #f7f7f9, transparent 62%),
+      radial-gradient(900px 460px at 92% 4%, #e2e2e9, transparent 58%),
+      linear-gradient(180deg, #ededf0, #e4e4e9);
+    color: #1c1c1f; font-family: 'Segoe UI', system-ui, sans-serif; padding: 32px 20px 64px;
+  }
+  .cabecera { max-width: 1180px; margin: 0 auto 12px; }
+  .cabecera h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .cabecera p.sub { margin-top: 6px; font-size: 14px; color: #55555c; max-width: 74ch; line-height: 1.5; }
+  .salidas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .salidas span { display: inline-flex; align-items: center; gap: 6px; border: 1px solid #c9c9cf; border-radius: 999px;
+    padding: 6px 12px; font-size: 12.5px; font-weight: 600; color: #3a3a40; background: #f7f7f8; }
+  .salidas b { color: #1c1c1f; }
+  .aviso-fuentes { max-width: 1180px; margin: 10px auto 28px; font-size: 12.5px; color: #6a6a72; }
+  .opciones { max-width: 1180px; margin: 0 auto; display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .opcion { display: flex; flex-direction: column; gap: 18px; }
+
+  .meta { background: #f7f7f8; border: 1px solid #d9d9de; border-radius: 14px; padding: 18px; }
+  .meta .letra { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 8px;
+    font-weight: 800; font-size: 15px; color: #f7f7f8; background: #1c1c1f; margin-right: 8px; }
+  .meta h2 { display: flex; align-items: center; font-size: 17px; font-weight: 700; }
+  .meta .direccion { margin-top: 4px; font-size: 13px; color: #55555c; line-height: 1.5; }
+  .hipotesis { margin-top: 10px; font-size: 13px; line-height: 1.5; color: #3a3a40; }
+  .meta ul.tokens { margin-top: 10px; list-style: none; font-size: 12px; color: #6a6a72; font-family: ui-monospace, monospace; line-height: 1.7; }
+  .especimen { margin-top: 12px; border-top: 1px solid #d9d9de; padding-top: 12px; }
+  .especimen .esp-display { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+  .especimen .esp-body { margin-top: 4px; font-size: 13.5px; color: #3a3a40; }
+  .paleta { display: flex; gap: 8px; margin-top: 10px; }
+  .paleta span { width: 26px; height: 26px; border-radius: 999px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .10), 0 1px 3px rgb(0 0 0 / .12); }
+
+  .telefono { width: 310px; margin: 0 auto; aspect-ratio: 9 / 19.5; border: 10px solid #101014; border-radius: 46px;
+    box-shadow: 0 24px 60px rgb(20 18 24 / .28); overflow: hidden; position: relative; display: flex; flex-direction: column; }
+  .statusbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 22px 6px; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .statusbar .der { display: flex; align-items: center; gap: 5px; }
+  .statusbar svg { display: block; }
+  .home-indicator { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 116px; height: 5px; border-radius: 999px; opacity: .85; }
+  .pantalla { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+  .cta { display: flex; align-items: center; justify-content: center; height: 46px; font-size: 14.5px; font-weight: 600; letter-spacing: .01em; flex-shrink: 0; }
+
+  .tabbar { display: flex; align-items: stretch; justify-content: space-around; margin: 10px -18px 0; padding: 8px 8px 16px;
+    border-top: 1px solid color-mix(in oklab, var(--text-2) 18%, transparent); background: color-mix(in oklab, var(--surface) 88%, transparent); flex-shrink: 0; }
+  .tabbar a { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9.5px; font-weight: 600; color: var(--text-2); text-decoration: none; }
+  .tabbar .tab-chip { display: flex; align-items: center; justify-content: center; width: 36px; height: 26px; border-radius: 9px; }
+  .tabbar a.activa { color: var(--accent); }
+  .tabbar a.activa .tab-chip { background: color-mix(in oklab, var(--accent) 14%, transparent); }
+
+  .op-b .tabbar, .op-c .tabbar { margin-top: auto; }
+  .op-c .tabbar { margin-inline: -16px; }
+  .rotulo-frame { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #85858e; margin-top: 2px; }
+  .hero-landing { width: 310px; margin: 6px auto 0; border-radius: 18px; overflow: hidden; border: 1px solid rgb(0 0 0 / .10);
+    box-shadow: 0 16px 40px rgb(20 18 24 / .16); background: var(--bg); color: var(--text-1); font-family: var(--font-body); padding: 22px 18px 18px; }
+  .hero-landing .hl-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); background: color-mix(in oklab, var(--accent) 10%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent); border-radius: 999px; padding: 4px 10px; }
+  .hero-landing h4 { font-family: var(--font-display); font-size: 24px; font-weight: 700; line-height: 1.14; letter-spacing: -0.01em; margin-top: 10px; }
+  .hero-landing h4 em { font-style: normal; color: var(--accent); }
+  .hero-landing .hl-sub { margin-top: 8px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+  .hero-landing .hl-sub b { color: var(--text-1); font-weight: 600; }
+  .hero-landing .hl-cta { margin-top: 14px; display: flex; align-items: center; justify-content: center; height: 46px; border-radius: var(--radius-btn); font-size: 14.5px; font-weight: 700; color: var(--on-accent);
+    background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 86%, white), var(--accent));
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .35), 0 10px 24px -6px color-mix(in oklab, var(--accent) 45%, transparent); }
+  .hero-landing .hl-prueba { margin-top: 10px; font-size: 11.5px; color: var(--text-2); text-align: center; }
+
+  /* ═════════ OPCIÓN A — "Editorial de datos" (Coolset × Papel y tinta) ═════════ */
+  .op-a {
+    --bg: #f6f7fb; --surface: #ffffff; --text-1: #0b0e4f; --text-2: #5a5f86; --accent: #2f5bea; --on-accent: #ffffff;
+    --radius-card: 6px; --radius-btn: 4px;
+    --font-display: 'Newsreader', monospace; --font-body: 'Hanken Grotesk', monospace;
+    --shadow-tinta: 11 14 79;
+    --s1: #8b5cf6; --s2: #2f5bea; --s3: #f5b027; --s4: #2fc4a0;
+  }
+  .op-a .especimen .esp-display { font-family: var(--font-display); }
+  .op-a .especimen .esp-body { font-family: var(--font-body); }
+  .op-a .telefono { background: var(--bg); }
+  .op-a .pantalla { font-family: var(--font-body); color: var(--text-1); padding: 0 18px; }
+  .op-a .statusbar { color: var(--text-1); }
+  .op-a .home-indicator { background: var(--text-1); }
+  .op-a .masthead { margin-top: 8px; border-bottom: 2px solid var(--text-1); padding-bottom: 8px; position: relative; }
+  .op-a .masthead::after { content: ''; position: absolute; left: 0; right: 0; bottom: -5px; border-bottom: 1px solid var(--text-1); }
+  .op-a .edicion { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); }
+  .op-a h3.t { font-family: var(--font-display); font-size: 25px; font-weight: 400; line-height: 1.08; margin-top: 3px; letter-spacing: -0.01em; }
+  .op-a h3.t em { font-style: normal; color: var(--accent); }
+  .op-a .gran { display: flex; align-items: baseline; gap: 8px; margin-top: 14px; }
+  .op-a .gran .n { font-family: var(--font-display); font-size: 54px; font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; }
+  .op-a .gran .u { font-size: 12px; color: var(--text-2); font-weight: 600; }
+  .op-a .gran .nivel { margin-left: auto; font-size: 10.5px; font-weight: 700; color: var(--accent); border: 1px solid color-mix(in oklab, var(--accent) 35%, transparent); padding: 3px 8px; border-radius: 999px; align-self: center; }
+  .op-a .leyenda { display: flex; gap: 8px; margin-top: 8px; font-size: 8.5px; color: var(--text-2); font-weight: 600; flex-wrap: wrap; }
+  .op-a .leyenda i { display: inline-block; width: 7px; height: 7px; border-radius: 2px; margin-right: 3px; }
+  .op-a .lista { margin-top: 10px; display: flex; flex-direction: column; }
+  .op-a .fila { padding: 9px 0; border-top: 1px solid color-mix(in oklab, var(--text-1) 14%, transparent); }
+  .op-a .fila .cab { display: flex; justify-content: space-between; align-items: baseline; }
+  .op-a .fila h4 { font-size: 12.5px; font-weight: 700; }
+  .op-a .fila .pt { font-family: var(--font-display); font-size: 17px; font-variant-numeric: tabular-nums; }
+  .op-a .fila .sub { font-size: 9.5px; color: var(--text-2); margin-top: 1px; }
+  .op-a .seg { display: flex; gap: 2px; height: 7px; margin-top: 6px; }
+  .op-a .seg i { display: block; border-radius: 1px; }
+  .op-a .cta { margin-top: auto; border-radius: var(--radius-btn); background: var(--text-1); color: #fff; margin-bottom: 0; }
+
+  /* ═════════ OPCIÓN B — "Bosque de datos" (Greenly × Fintech de bolsillo, oscuro derivado) ═════════ */
+  .op-b {
+    --bg: #0e1714; --surface: #15211c; --text-1: #e6efea; --text-2: #93a79c; --accent: #6fcf97; --on-accent: #0e1714;
+    --radius-card: 14px; --radius-btn: 10px;
+    --font-display: 'Geologica', monospace; --font-body: 'Wix Madefor Text', monospace;
+    --shadow-tinta: 3 8 6;
+  }
+  .op-b .especimen .esp-display { font-family: var(--font-display); }
+  .op-b .especimen .esp-body { font-family: var(--font-body); }
+  .op-b .telefono { background: var(--bg); }
+  .op-b .pantalla { font-family: var(--font-body); color: var(--text-1); padding: 0 18px; }
+  .op-b .statusbar { color: var(--text-1); }
+  .op-b .home-indicator { background: var(--text-1); }
+  .op-b .enc { margin-top: 10px; text-align: center; }
+  .op-b .enc .per { font-size: 10.5px; font-weight: 600; color: var(--text-2); }
+  .op-b h3.t { font-family: var(--font-display); font-size: 19px; font-weight: 600; letter-spacing: -0.02em; margin-top: 2px; }
+  .op-b .radar { position: relative; width: 196px; height: 176px; margin: 8px auto 0; }
+  .op-b .radar svg { display: block; }
+  .op-b .radar .ej { position: absolute; font-size: 9.5px; font-weight: 600; color: var(--text-2); }
+  .op-b .radar .centro { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
+  .op-b .centro .pct { font-family: var(--font-display); font-size: 25px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .op-b .centro .pl { font-size: 8.5px; color: var(--text-2); font-weight: 600; }
+  .op-b .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px; }
+  .op-b .tile { background: var(--surface); border-radius: var(--radius-card); border: 1px solid rgb(255 255 255 / .07); padding: 9px 10px; }
+  .op-b .tile.dest { border: 1.5px solid transparent;
+    background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--accent) 50%, transparent), transparent 60%) border-box; }
+  .op-b .tile .tl { display: flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 600; color: var(--text-2); }
+  .op-b .tile .td { margin-top: 4px; font-family: var(--font-display); font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; display: flex; align-items: baseline; gap: 4px; }
+  .op-b .tile .td small { font-size: 9.5px; color: var(--accent); font-weight: 600; letter-spacing: 0; }
+  .op-b .cta { margin-top: auto; border-radius: var(--radius-btn); background: var(--accent); color: var(--on-accent); box-shadow: 0 8px 24px color-mix(in oklab, var(--accent) 28%, transparent); }
+
+  /* ═════════ OPCIÓN C — "Tablero luminoso" (Sweep × bento redondeado) ═════════ */
+  .op-c {
+    --bg: #f3f5ff; --surface: #ffffff; --text-1: #11142b; --text-2: #5d6283; --accent: #283fff; --on-accent: #ffffff;
+    --radius-card: 18px; --radius-btn: 12px;
+    --font-display: 'Schibsted Grotesk', monospace; --font-body: 'Figtree', monospace;
+    --shadow-tinta: 40 63 255;
+  }
+  .op-c .especimen .esp-display { font-family: var(--font-display); }
+  .op-c .especimen .esp-body { font-family: var(--font-body); }
+  .op-c .telefono { background: radial-gradient(260px 200px at 90% -4%, #d9e0ff, transparent 70%), radial-gradient(240px 200px at -10% 38%, #e4f6ff, transparent 70%), var(--bg); }
+  .op-c .pantalla { font-family: var(--font-body); color: var(--text-1); padding: 0 16px; }
+  .op-c .statusbar { color: var(--text-1); }
+  .op-c .home-indicator { background: var(--text-1); }
+  .op-c .sal { margin-top: 8px; font-size: 11px; font-weight: 600; color: var(--text-2); }
+  .op-c h3.t { font-family: var(--font-display); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; margin-top: 1px; }
+  .op-c .heroe { margin-top: 10px; border-radius: var(--radius-card); padding: 14px; color: #fff; position: relative; overflow: hidden;
+    background: radial-gradient(160px 120px at 100% 0%, #6f86ff, transparent 70%), linear-gradient(145deg, #283fff, #1a2bd1);
+    box-shadow: 0 14px 28px -12px rgb(40 63 255 / .55); }
+  .op-c .heroe .hl { font-size: 10.5px; font-weight: 600; opacity: .85; }
+  .op-c .heroe .hn { font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .op-c .heroe .hn small { font-size: 14px; font-weight: 600; opacity: .8; letter-spacing: 0; }
+  .op-c .heroe .hp { display: inline-flex; margin-top: 6px; font-size: 10px; font-weight: 700; background: rgb(255 255 255 / .18); border-radius: 999px; padding: 3px 9px; }
+  .op-c .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .op-c .bt { background: var(--surface); border-radius: 16px; padding: 10px; box-shadow: 0 10px 22px -14px rgb(var(--shadow-tinta) / .35); border: 1px solid rgb(40 63 255 / .06); }
+  .op-c .bt .chip { width: 26px; height: 26px; border-radius: 9px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+  .op-c .bt .nm { font-size: 10.5px; font-weight: 600; color: var(--text-2); }
+  .op-c .bt .pt { font-family: var(--font-display); font-size: 19px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .op-c .bt .bar { height: 5px; border-radius: 999px; background: #e8ebfb; margin-top: 6px; overflow: hidden; }
+  .op-c .bt .bar i { display: block; height: 100%; border-radius: 999px; }
+  .op-c .ancho { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; }
+  .op-c .ancho p { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+  .op-c .ancho p b { color: var(--text-1); }
+  .op-c .cta { margin-top: auto; border-radius: var(--radius-btn); background: var(--accent); color: #fff; box-shadow: 0 10px 22px -6px rgb(40 63 255 / .45); }
+
+  .pie { max-width: 1180px; margin: 40px auto 0; font-size: 12.5px; color: #6a6a72; border-top: 1px solid #d0d0d6; padding-top: 14px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <h1>Dirección de arte — 3 opciones para SustentaESG</h1>
+  <p class="sub">La misma pantalla clave, <b>resultados del diagnóstico</b>, resuelta en tres estilos de verdad distintos. Cualquiera de las tres puede ser la app final. Los datos son de una <b>empresa de ejemplo</b>, no resultados reales.</p>
+  <div class="salidas" role="list">
+    <span role="listitem"><b>1 · Elegir</b> A, B o C</span>
+    <span role="listitem"><b>2 · Combinar</b> («la C pero con la letra de la A»)</span>
+    <span role="listitem"><b>3 · Pedir otras 3</b> direcciones nuevas</span>
+    <span role="listitem"><b>4 · Ajustar un detalle</b> («la A con el acento más verde»)</span>
+  </div>
+</header>
+<p class="aviso-fuentes">Verificación de fuentes: el nombre de cada familia (en cada panel) se muestra EN su propia fuente. Si se ve letra de máquina de escribir, esa fuente no cargó.</p>
+
+<div class="opciones">
+
+  <!-- ═══════════ OPCIÓN A ═══════════ -->
+  <section class="opcion op-a" aria-label="Opción A">
+    <div class="meta">
+      <h2><span class="letra">A</span> Informe editorial</h2>
+      <p class="direccion">Seria y de confianza, como un informe bien editado. Tu puntaje en grande y una barra por dimensión que muestra cómo están repartidas tus respuestas. Inspirada en Coolset.</p>
+      <p class="hipotesis"><strong>Por qué podría funcionar:</strong> transmite rigor y orden, que es lo que busca quien entrega informes a otros.</p>
+      <ul class="tokens"><li>fondo #F6F7FB · tinta #0B0E4F · acento #2F5BEA</li><li>esquinas 6/4 px · letra con serifa + sans</li></ul>
+      <div class="paleta" aria-hidden="true"><span style="background:#f6f7fb"></span><span style="background:#ffffff"></span><span style="background:#0b0e4f"></span><span style="background:#5a5f86"></span><span style="background:#2f5bea"></span><span style="background:#8b5cf6"></span><span style="background:#f5b027"></span><span style="background:#2fc4a0"></span></div>
+      <div class="especimen"><p class="esp-display">Newsreader — AaBbÑñ 0123</p><p class="esp-body">Hanken Grotesk — El veloz murciélago hindú comía feliz cardillo y kiwi.</p></div>
+    </div>
+
+    <div class="telefono">
+      <div class="statusbar"><span>9:41</span><span class="der">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg></span></div>
+      <div class="pantalla">
+        <div class="masthead"><p class="edicion">Empresa de ejemplo · 21 oct 2026</p><h3 class="t">Tu madurez en <em>sostenibilidad</em></h3></div>
+        <div class="gran"><span class="n">57</span><span class="u">/ 100</span><span class="nivel">En desarrollo</span></div>
+        <div class="leyenda"><span><i style="background:#8b5cf6"></i>Nivel 0-1</span><span><i style="background:#2f5bea"></i>Nivel 2</span><span><i style="background:#f5b027"></i>Nivel 3</span><span><i style="background:#2fc4a0"></i>Nivel 4</span></div>
+        <div class="lista">
+          <div class="fila"><div class="cab"><h4>Ambiental</h4><span class="pt">48.9</span></div><p class="sub">9 de 10 preguntas · 1 sin información</p>
+            <div class="seg"><i style="flex:3;background:#8b5cf6"></i><i style="flex:3;background:#2f5bea"></i><i style="flex:2;background:#f5b027"></i><i style="flex:1;background:#2fc4a0"></i></div></div>
+          <div class="fila"><div class="cab"><h4>Social</h4><span class="pt">61.3</span></div><p class="sub">10 de 10 preguntas</p>
+            <div class="seg"><i style="flex:1;background:#8b5cf6"></i><i style="flex:4;background:#2f5bea"></i><i style="flex:3;background:#f5b027"></i><i style="flex:2;background:#2fc4a0"></i></div></div>
+          <div class="fila"><div class="cab"><h4>Gobernanza</h4><span class="pt">52.0</span></div><p class="sub">8 de 10 preguntas · 2 sin información</p>
+            <div class="seg"><i style="flex:2;background:#8b5cf6"></i><i style="flex:3;background:#2f5bea"></i><i style="flex:2;background:#f5b027"></i><i style="flex:1;background:#2fc4a0"></i></div></div>
+          <div class="fila"><div class="cab"><h4>Económica</h4><span class="pt">66.7</span></div><p class="sub">6 de 6 preguntas</p>
+            <div class="seg"><i style="flex:1;background:#8b5cf6"></i><i style="flex:1;background:#2f5bea"></i><i style="flex:3;background:#f5b027"></i><i style="flex:1;background:#2fc4a0"></i></div></div>
+        </div>
+        <div class="cta">Ver brechas y plan de mejora</div>
+        <nav class="tabbar" aria-label="Navegación">
+          <a class="activa" href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>Resultados</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>Diagnóstico</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg></span>Plan</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Historial</a>
+        </nav>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <p class="rotulo-frame">Así se vería la página que vende tu app</p>
+    <div class="hero-landing">
+      <span class="hl-badge">Diagnóstico de sostenibilidad</span>
+      <h4>Sabe dónde está tu empresa y qué <em>mejorar primero</em></h4>
+      <p class="hl-sub"><b>Un diagnóstico, un plan y tu historial.</b> Todo ordenado por empresa, sin empezar desde cero cada vez.</p>
+      <div class="hl-cta">Iniciar mi diagnóstico gratis</div>
+      <p class="hl-prueba">7 días de prueba · sin tarjeta</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ OPCIÓN B ═══════════ -->
+  <section class="opcion op-b" aria-label="Opción B">
+    <div class="meta">
+      <h2><span class="letra">B</span> Bosque de datos</h2>
+      <p class="direccion">Oscura y enfocada, con un gráfico de araña que muestra de un vistazo cómo está cada dimensión. Verde sobrio, sin brillos. Inspirada en Greenly.</p>
+      <p class="hipotesis"><strong>Por qué podría funcionar:</strong> el gráfico central se entiende en 2 segundos y se ve como una herramienta de análisis, no como un formulario.</p>
+      <ul class="tokens"><li>fondo #0E1714 · verde #6FCF97</li><li>esquinas 14/10 px · letra geométrica</li></ul>
+      <div class="paleta" aria-hidden="true"><span style="background:#0e1714"></span><span style="background:#15211c"></span><span style="background:#e6efea"></span><span style="background:#93a79c"></span><span style="background:#6fcf97"></span></div>
+      <div class="especimen"><p class="esp-display">Geologica — AaBbÑñ 0123</p><p class="esp-body">Wix Madefor Text — El veloz murciélago hindú comía feliz cardillo y kiwi.</p></div>
+    </div>
+
+    <div class="telefono">
+      <div class="statusbar"><span>9:41</span><span class="der">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg></span></div>
+      <div class="pantalla">
+        <div class="enc"><p class="per">Empresa de ejemplo · 21 oct 2026</p><h3 class="t">Tu madurez, de un vistazo</h3></div>
+        <div class="radar">
+          <svg width="196" height="176" viewBox="0 0 196 176" role="img" aria-label="Gráfico de araña: Ambiental 49, Social 61, Gobernanza 52, Económica 67">
+            <g fill="none" stroke="rgba(230,239,234,.13)" stroke-width="1">
+              <polygon points="98,18 168,88 98,158 28,88"/><polygon points="98,38 148,88 98,138 48,88"/><polygon points="98,58 128,88 98,118 68,88"/>
+              <line x1="98" y1="18" x2="98" y2="158"/><line x1="28" y1="88" x2="168" y2="88"/>
+            </g>
+            <!-- valores: Amb 48.9 (arriba) · Soc 61.3 (derecha) · Gob 52.0 (abajo) · Eco 66.7 (izquierda), radio 70 -->
+            <polygon points="98,53.8 140.9,88 98,124.4 51.3,88" fill="rgba(111,207,151,.20)" stroke="#6fcf97" stroke-width="2" stroke-linejoin="round"/>
+            <g fill="#6fcf97"><circle cx="98" cy="53.8" r="3.5"/><circle cx="140.9" cy="88" r="3.5"/><circle cx="98" cy="124.4" r="3.5"/><circle cx="51.3" cy="88" r="3.5"/></g>
+          </svg>
+          <span class="ej" style="left:50%;top:-3px;transform:translateX(-50%)">Ambiental</span>
+          <span class="ej" style="right:-8px;top:50%;transform:translateY(-50%)">Social</span>
+          <span class="ej" style="left:50%;bottom:-3px;transform:translateX(-50%)">Gobernanza</span>
+          <span class="ej" style="left:-10px;top:50%;transform:translateY(-50%)">Económica</span>
+          <div class="centro"><p class="pct">57</p><p class="pl">de 100</p></div>
+        </div>
+        <div class="grid2">
+          <div class="tile dest"><p class="tl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6fcf97" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Nivel</p><p class="td" style="font-size:14px">En desarrollo</p></div>
+          <div class="tile"><p class="tl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Cobertura</p><p class="td">93<small>%</small></p></div>
+          <div class="tile"><p class="tl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Más fuerte</p><p class="td" style="font-size:14px">Económica <small>66.7</small></p></div>
+          <div class="tile"><p class="tl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>A mirar primero</p><p class="td" style="font-size:14px">Ambiental <small>48.9</small></p></div>
+        </div>
+        <div class="cta" style="margin-top:10px">Ver plan de mejora</div>
+        <nav class="tabbar" aria-label="Navegación">
+          <a class="activa" href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>Resultados</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>Diagnóstico</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg></span>Plan</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Historial</a>
+        </nav>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <p class="rotulo-frame">Así se vería la página que vende tu app</p>
+    <div class="hero-landing">
+      <span class="hl-badge">Diagnóstico de sostenibilidad</span>
+      <h4>Mira tu empresa <em>de un vistazo</em> y sabe qué atender primero</h4>
+      <p class="hl-sub"><b>Cuatro dimensiones, un solo gráfico.</b> Ves tus brechas y las conviertes en un plan que puedes seguir.</p>
+      <div class="hl-cta">Iniciar mi diagnóstico gratis</div>
+      <p class="hl-prueba">7 días de prueba · sin tarjeta</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ OPCIÓN C ═══════════ -->
+  <section class="opcion op-c" aria-label="Opción C">
+    <div class="meta">
+      <h2><span class="letra">C</span> Tablero luminoso</h2>
+      <p class="direccion">Moderna y amable, con tarjetas redondeadas y un azul eléctrico que guía el ojo al número principal. Se siente como una app actual, fácil de usar. Inspirada en Sweep.</p>
+      <p class="hipotesis"><strong>Por qué podría funcionar:</strong> baja el miedo a "otro software complicado": se ve simple, ligera y rápida de entender.</p>
+      <ul class="tokens"><li>fondo #F3F5FF · azul #283FFF</li><li>esquinas 18/12 px · letra sans moderna</li></ul>
+      <div class="paleta" aria-hidden="true"><span style="background:#f3f5ff"></span><span style="background:#ffffff"></span><span style="background:#11142b"></span><span style="background:#5d6283"></span><span style="background:#283fff"></span><span style="background:#6f86ff"></span></div>
+      <div class="especimen"><p class="esp-display">Schibsted Grotesk — AaBbÑñ 0123</p><p class="esp-body">Figtree — El veloz murciélago hindú comía feliz cardillo y kiwi.</p></div>
+    </div>
+
+    <div class="telefono">
+      <div class="statusbar"><span>9:41</span><span class="der">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg></span></div>
+      <div class="pantalla">
+        <p class="sal">Empresa de ejemplo · 21 oct 2026</p>
+        <h3 class="t">Así va tu sostenibilidad</h3>
+        <div class="heroe">
+          <p class="hl">Puntaje general</p>
+          <p class="hn">57.2 <small>/ 100</small></p>
+          <span class="hp">En desarrollo · 37 de 40 respuestas</span>
+        </div>
+        <div class="bento">
+          <div class="bt"><span class="chip" style="background:#e3f5ea"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2a9d5c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.4-6"/></svg></span><p class="nm">Ambiental</p><p class="pt">48.9</p><div class="bar"><i style="width:48.9%;background:#2a9d5c"></i></div></div>
+          <div class="bt"><span class="chip" style="background:#efe8fd"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7a52d6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M22 20c0-2.6-1.6-4.6-4-5.5"/></svg></span><p class="nm">Social</p><p class="pt">61.3</p><div class="bar"><i style="width:61.3%;background:#7a52d6"></i></div></div>
+          <div class="bt"><span class="chip" style="background:#ffeede"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e8700f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8v2h18V8Z"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></svg></span><p class="nm">Gobernanza</p><p class="pt">52.0</p><div class="bar"><i style="width:52%;background:#e8700f"></i></div></div>
+          <div class="bt"><span class="chip" style="background:#e1ecff"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#283fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><p class="nm">Económica</p><p class="pt">66.7</p><div class="bar"><i style="width:66.7%;background:#283fff"></i></div></div>
+          <div class="bt ancho"><span class="chip" style="background:#fff3d6;margin:0;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c98a00" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span><p><b>3 preguntas</b> sin información. Complétalas para afinar tu resultado.</p></div>
+        </div>
+        <div class="cta" style="margin-top:10px">Ver mi plan de mejora</div>
+        <nav class="tabbar" aria-label="Navegación">
+          <a class="activa" href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span>Resultados</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>Diagnóstico</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/></svg></span>Plan</a>
+          <a href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Historial</a>
+        </nav>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <p class="rotulo-frame">Así se vería la página que vende tu app</p>
+    <div class="hero-landing">
+      <span class="hl-badge">Diagnóstico de sostenibilidad</span>
+      <h4>Tu diagnóstico de sostenibilidad, <em>claro y a tu ritmo</em></h4>
+      <p class="hl-sub"><b>Responde, mira tus resultados y arma tu plan.</b> Sin hojas de cálculo y sin empezar de cero cada vez.</p>
+      <div class="hl-cta">Iniciar mi diagnóstico gratis</div>
+      <p class="hl-prueba">7 días de prueba · sin tarjeta</p>
+    </div>
+  </section>
+
+</div>
+
+<footer class="pie">
+  Gates antes de mostrar esta página (54): TEST DE DIVERGENCIA (en escala de grises se ven 3 diseños distintos) · fuentes verificadas clase por clase en el espécimen (el fallback monospace delata la que no cargó) · mockups llenos con datos de ejemplo y barra de navegación visible, cero emojis (todo ícono es SVG) · cada opción con su hero de página de ventas y su muestra de paleta · marcador data-kit="abc-v2" intacto. La elegida y las descartadas se anotan en FICHA-ARTE.md.
+</footer>
+
+</body>
+</html>
