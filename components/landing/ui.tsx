@@ -195,6 +195,7 @@ export function CtaButton({
         whileTap={{ scale: 0.97 }}
         href={href}
         aria-busy={estado === 'abriendo'}
+        data-cta-inline=""
         onClick={alTocar}
         className={`inline-flex w-full items-center justify-center whitespace-nowrap rounded-[var(--radius-button)] bg-[var(--accent)] px-4 text-center text-[16px] font-semibold text-[var(--bg)] shadow-[0_8px_30px_color-mix(in_oklab,var(--accent)_25%,transparent)] transition-colors duration-150 hover:bg-[color-mix(in_oklab,var(--accent)_88%,var(--text-primary))] sm:w-auto sm:px-8 sm:text-[17px] [touch-action:manipulation] ${
           alto === 56 ? 'h-14' : 'h-[52px]'
@@ -237,6 +238,7 @@ export function StickyCtaMobile({
   const [ofertaVisible, setOfertaVisible] = useState(false);
   const [ofertaVista, setOfertaVista] = useState(false);
   const [finalVisible, setFinalVisible] = useState(false);
+  const [botonVisible, setBotonVisible] = useState(false);
 
   useEffect(() => {
     const observar = (id: string, onChange: (visible: boolean) => void): IntersectionObserver | null => {
@@ -258,14 +260,28 @@ export function StickyCtaMobile({
       if (v) setOfertaVista(true);
     });
     const c = observar(ctaFinalId, setFinalVisible);
+    // Si ya hay un botón igual a la vista dentro de la página, la barra fija sobra: se esconde.
+    const aVista = new Set<Element>();
+    const botones = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) aVista.add(e.target);
+          else aVista.delete(e.target);
+        }
+        setBotonVisible(aVista.size > 0);
+      },
+      { threshold: 0.6 }
+    );
+    document.querySelectorAll('[data-cta-inline]').forEach((el) => botones.observe(el));
     return () => {
       a?.disconnect();
       b?.disconnect();
       c?.disconnect();
+      botones.disconnect();
     };
   }, [heroId, ofertaId, ctaFinalId]);
 
-  const visible = !heroVisible && !ofertaVisible && !finalVisible;
+  const visible = !heroVisible && !ofertaVisible && !finalVisible && !botonVisible;
 
   return (
     <AnimatePresence>

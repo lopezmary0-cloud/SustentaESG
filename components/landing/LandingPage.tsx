@@ -21,7 +21,7 @@ import { ANIO_COPYRIGHT, APP_NAME, CTA_HREF, CTA_LABEL, SOPORTE_EMAIL } from '@/
 
 export function LandingPage() {
   return (
-    <div className="min-h-dvh bg-[var(--bg)] text-[var(--text-primary)] [font-family:var(--font-body)]">
+    <div className="min-h-dvh bg-[var(--bg)] pb-20 text-[var(--text-primary)] [font-family:var(--font-body)] md:pb-0">
       {/* 1. HERO */}
       <Hero
         appName={APP_NAME}

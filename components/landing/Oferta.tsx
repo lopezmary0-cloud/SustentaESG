@@ -8,6 +8,7 @@
 // la card recomendada (el uso canónico de la técnica) · checkmarks custom.
 // El destino de los CTAs sigue al MODELO de 02C (checkout vs /onboarding).
 
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 import { CheckCustom, CtaButton, Hairline, Kicker, SectionShell, useReveal, VIEWPORT_ONCE } from './ui';
@@ -47,6 +48,8 @@ export interface OfertaProps {
     totalTachado: string;
     nota?: string;
   };
+  /** Selector opcional bajo el título (p. ej. Empresa / Consultor). */
+  selector?: ReactNode;
   /** default 'oferta' — lo observa StickyCtaMobile. */
   id?: string;
 }
@@ -98,6 +101,7 @@ export function Oferta({
   anual,
   mensual,
   stack,
+  selector,
   id = 'oferta',
 }: OfertaProps) {
   warnCopy('Oferta → título', tituloMarked, 8);
@@ -112,6 +116,12 @@ export function Oferta({
             <MarkedCopy text={tituloMarked} />
           </h2>
         </motion.div>
+
+        {selector && (
+          <motion.div variants={item} className="mt-6 flex justify-center">
+            {selector}
+          </motion.div>
+        )}
 
         {/* Stack de valor Hormozi — ARRIBA de los planes; el tachado es del TOTAL
             del stack (nunca un precio mensual falso inflado — 50 C5) */}

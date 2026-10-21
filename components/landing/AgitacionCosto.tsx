@@ -8,14 +8,15 @@
 
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { FileSpreadsheet, Minus, Plus, Repeat, SearchX } from 'lucide-react';
-import { IconChip, SectionShell, useReveal, VIEWPORT_ONCE } from './ui';
+import { Clock, Minus, Plus, ShieldQuestion, Zap } from 'lucide-react';
+import { CtaButton, IconChip, SectionShell, useReveal, VIEWPORT_ONCE } from './ui';
+import { CTA_HREF, CTA_LABEL } from '@/lib/site';
 import { MarkedCopy } from './MarkedCopy';
 
 const TARJETAS = [
-  { icon: Repeat, titulo: 'Rehaces', detalle: 'El mismo diagnóstico, cada vez que te lo piden.' },
-  { icon: FileSpreadsheet, titulo: 'Buscas', detalle: 'La última versión entre Excel y correos.' },
-  { icon: SearchX, titulo: 'Adivinas', detalle: 'Qué te falta, hasta que alguien lo pregunta.' },
+  { icon: Clock, titulo: 'Pierdes horas', detalle: 'Rehaciendo lo que ya habías hecho.' },
+  { icon: Zap, titulo: 'Respondes a las carreras', detalle: 'Cuando por fin encuentras los datos.' },
+  { icon: ShieldQuestion, titulo: 'Entregas con dudas', detalle: 'Sin saber si falta algo importante.' },
 ];
 
 const formato = new Intl.NumberFormat('es-CO', { maximumFractionDigits: 1 });
@@ -130,6 +131,13 @@ export function AgitacionCosto({ id }: { id?: string }) {
             </p>
           </div>
           <p className="mt-3 text-xs text-[var(--text-tertiary)]">Es una cuenta con tus números, no una estadística.</p>
+        </motion.div>
+
+        <motion.div variants={item} className="mt-8 flex flex-col items-center gap-4 text-center">
+          <p className="text-[17px] font-medium text-[var(--text-primary)]">
+            La Rueda de Madurez lo ordena <span className="text-[var(--accent)]">una sola vez</span>.
+          </p>
+          <CtaButton href={CTA_HREF}>{CTA_LABEL}</CtaButton>
         </motion.div>
       </motion.div>
     </SectionShell>
