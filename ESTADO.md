@@ -70,3 +70,10 @@ Tu OK a la Etapa 0 → Etapa 1 (identidad visual): pregunta de referencia + 3 es
 - 2026-10-21: el usuario prefiere modo oscuro y delegó la decisión. **Decisión de Claude:** modo oscuro como identidad de la app y la página de ventas; informes PDF/impresos siempre en claro; selector claro/oscuro en versión posterior (tokens claros ya definidos en combinacion-bosque.html). Razón: coincide con su referencia y con la sensación de herramienta de análisis; riesgo: formularios largos en oscuro → superficies elevadas y contraste alto (por medir).
 - Tour entregado: `vista-previa-app.html` (5 pantallas: recorrido de inicio, diagnóstico, resultados, plan de mejora, planes). Captura: docs/revisiones/tour-app-escritorio.png. Letras verificadas; sin desbordes. Precios mostrados = hipótesis del usuario (US$9/60 y 15/70 → en la maqueta solo anual 60/70).
 - Pendiente: aprobación del tour → FICHA-ARTE.md + tokens + medición de contraste → Etapa 2 (página de ventas) previa aprobación de FICHA-AVATAR.
+
+## Etapa 1 — CERRADA (2026-10-21)
+- Tour aprobado por el usuario. FICHA-ARTE.md escrita y aprobada; tokens en docs/diseno/tokens.css (se vuelcan a globals.css al crear el proyecto de la app).
+- Dirección de arte (registro anti-repetición): «Bosque oscuro» · dispositivo: barra segmentada de madurez + rueda con gota · paleta #0F1418/#8FBF7F/#C9A66B · par Newsreader + Figtree.
+- Contraste medido: todo texto del modo oscuro ≥ 4,5. Modo claro: colores de dimensión sin medir.
+- Siguiente: Etapa 2 (página de ventas). BLOQUEO: el usuario debe aprobar FICHA-AVATAR.md (copy se deriva de ahí). Después: leer 19, 52, 55, kit plantillas-codigo/landing.
+- Pendientes que siguen abiertos: nombre/dominio SustentaESG sin verificar · Hotmart (comisión, prueba, garantía, PSE) sin verificar · abogado para política de datos (Ley 1581) · especialista revisa METODOLOGIA-BORRADOR · fotos reales para el hero (hoy ilustración) · Playwright MCP ya conecta (se usó para capturas).

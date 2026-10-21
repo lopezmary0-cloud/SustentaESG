@@ -1,0 +1,84 @@
+/* SustentaESG — tokens de diseño (fuente: FICHA-ARTE.md, aprobada 2026-10-21)
+   Se copia a globals.css (@theme de Tailwind v4) cuando exista el proyecto de la app.
+   Regla: ningún componente usa hex directo; todo sale de estas variables. */
+
+:root,
+[data-theme="oscuro"] {
+  /* superficies: 3 niveles */
+  --bg: #0f1418;
+  --surface: #161c22;
+  --elev: #1b2126;
+  --line: #2a3138;
+
+  /* texto */
+  --text-1: #e8ede6;
+  --text-2: #98a39a;
+
+  /* acento: solo botón principal, enlace, opción elegida y dato clave */
+  --accent: #8fbf7f;
+  --on-accent: #0f1418;
+
+  /* 2ª nota y semánticos */
+  --sand: #c9a66b;
+  --success: #8fbf7f;
+  --warning: #c9a66b;
+  --error: #e0a07a;
+
+  /* dimensiones */
+  --dim-ambiental: #8fbf7f;
+  --dim-social: #c9a66b;
+  --dim-gobernanza: #d08a5a;
+  --dim-economica: #7fb3a6;
+  --dim-cadena: #7a9a52;
+
+  /* niveles de madurez (barra segmentada) */
+  --nivel-1: #b87b4e;
+  --nivel-2: #c9a66b;
+  --nivel-3: #5f8a4f;
+  --nivel-4: #a9d08e;
+
+  /* tarjeta héroe */
+  --hero-from: #2f4d36;
+  --hero-to: #1a2c20;
+  --hero-text: #f1f4ea;
+
+  /* forma y movimiento */
+  --radius-card: 14px;
+  --radius-btn: 10px;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur: 250ms;
+  --stagger: 60ms;
+
+  /* tipografía */
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Figtree', sans-serif;
+
+  /* espaciado (escala única) */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+}
+
+/* Modo claro: para el selector futuro; los informes PDF/impresos usan siempre estos valores */
+[data-theme="claro"] {
+  --bg: #f1f4ec;
+  --surface: #ffffff;
+  --elev: #ffffff;
+  --line: #dde3d6;
+  --text-1: #17261c;
+  --text-2: #5d6d60;
+  --accent: #3f6b3d;
+  --on-accent: #ffffff;
+  --sand: #a8802f;
+  --success: #3f7a45;
+  --warning: #a8802f;
+  --error: #b4673a;
+  --dim-ambiental: #3f7a45;
+  --dim-social: #a8802f;
+  --dim-gobernanza: #b4673a;
+  --dim-economica: #3d8a7b;
+  --dim-cadena: #5f8a4f;
+  --nivel-4: #8fbf7f;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur: 1ms; --stagger: 0ms; }
+}
