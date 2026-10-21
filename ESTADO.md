@@ -77,3 +77,8 @@ Tu OK a la Etapa 0 → Etapa 1 (identidad visual): pregunta de referencia + 3 es
 - Contraste medido: todo texto del modo oscuro ≥ 4,5. Modo claro: colores de dimensión sin medir.
 - Siguiente: Etapa 2 (página de ventas). BLOQUEO: el usuario debe aprobar FICHA-AVATAR.md (copy se deriva de ahí). Después: leer 19, 52, 55, kit plantillas-codigo/landing.
 - Pendientes que siguen abiertos: nombre/dominio SustentaESG sin verificar · Hotmart (comisión, prueba, garantía, PSE) sin verificar · abogado para política de datos (Ley 1581) · especialista revisa METODOLOGIA-BORRADOR · fotos reales para el hero (hoy ilustración) · Playwright MCP ya conecta (se usó para capturas).
+
+## Novedades del usuario (2026-10-21)
+- Nombre: el usuario confirma que **SustentaESG está disponible** (no verificado por Claude; falta anotar dónde lo comprobó: dominio, marca SIC o ambos). Queda cerrado el pendiente del nombre; el dominio se compra cuando el usuario lo autorice (costo ~US$10–15/año).
+- Parte de arriba de la página de ventas: usar **la imagen de la propia app** (pantallas bonitas de la app) en lugar de una foto. Se cierra el pendiente de "foto real". Etapa 2: el hero muestra la app (resultados con la rueda y las barras) sobre el paisaje oscuro; las capturas reales reemplazan a las maquetas cuando la app exista. Sin testimonios ni cifras de clientes.
+- FICHA-AVATAR actualizada: el usuario es quien lleva la sostenibilidad de una o varias empresas, interno o externo. Presentada al usuario en simple para aprobar.
