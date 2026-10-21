@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es" data-kit="abc-v2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour de la app — SustentaESG</title>
+<!-- KIT-ABC-V2: tour de la app (vista-previa-app.html), nacido del frame ya tematizado (combinacion-bosque.html).
+     El marcador data-kit="abc-v2" NO se borra. Fallback-trampa: cada familia lleva `monospace`. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Figtree:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: radial-gradient(1100px 520px at 12% -6%, #2a3a2f, transparent 62%), radial-gradient(900px 460px at 92% 4%, #2e2a1e, transparent 58%), linear-gradient(180deg, #151b1f, #0d1114);
+    color: #e8ede6; font-family: 'Figtree', monospace; padding: 32px 20px 64px; }
+  .cabecera { max-width: 1240px; margin: 0 auto 8px; }
+  .cabecera h1 { font-family: 'Newsreader', monospace; font-size: 32px; font-weight: 400; letter-spacing: -0.01em; }
+  .cabecera p.sub { margin-top: 6px; font-size: 14px; color: #98a39a; max-width: 80ch; line-height: 1.55; }
+  .salidas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .salidas span { border: 1px solid #2f3a33; border-radius: 999px; padding: 6px 12px; font-size: 12.5px; font-weight: 600; color: #c4cfc6; background: #161c22; }
+  .salidas b { color: #e8ede6; }
+  .tour { max-width: 1240px; margin: 32px auto 0; display: grid; gap: 40px 28px; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); justify-items: center; }
+  .vista { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .vista figcaption { text-align: center; max-width: 300px; }
+  .vista figcaption b { display: block; font-size: 14px; color: #e8ede6; }
+  .vista figcaption span { display: block; margin-top: 2px; font-size: 12.5px; color: #98a39a; line-height: 1.45; }
+  .vista figcaption span.num { display: inline-flex; margin-top: 0; color: #0f1418; font-size: 12px; line-height: 1; }
+  .num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 7px; background: #8fbf7f; color: #0f1418; font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+
+  /* ═══ TOKENS (modo oscuro aprobado) ═══ */
+  .app {
+    --bg: #0f1418; --surface: #161c22; --elev: #1b2126; --line: #2a3138;
+    --text-1: #e8ede6; --text-2: #98a39a; --accent: #8fbf7f; --on-accent: #0f1418;
+    --radius-card: 14px; --radius-btn: 10px;
+    --font-display: 'Newsreader', monospace; --font-body: 'Figtree', monospace;
+    --s1: #b87b4e; --s2: #c9a66b; --s3: #5f8a4f; --s4: #a9d08e;
+    --c-amb: #8fbf7f; --c-soc: #c9a66b; --c-gob: #d08a5a; --c-eco: #7fb3a6;
+    --alta: #e0a07a; --media: #c9a66b; --baja: #8fbf7f;
+  }
+  .telefono { width: 310px; aspect-ratio: 9 / 19.5; border: 10px solid #07090b; border-radius: 46px; box-shadow: 0 24px 60px rgb(0 0 0 / .55);
+    overflow: hidden; position: relative; display: flex; flex-direction: column;
+    background: radial-gradient(260px 200px at 90% -4%, #22382b, transparent 70%), radial-gradient(240px 200px at -10% 38%, #2a2a1e, transparent 70%), var(--bg); }
+  .statusbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 22px 6px; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text-1); }
+  .statusbar .der { display: flex; align-items: center; gap: 5px; }
+  .statusbar svg { display: block; }
+  .home-indicator { position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); width: 116px; height: 5px; border-radius: 999px; opacity: .85; background: var(--text-1); }
+  .pantalla { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; padding: 0 16px; font-family: var(--font-body); color: var(--text-1); }
+  .over { margin-top: 8px; font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); }
+  h3.t { font-family: var(--font-display); font-size: 25px; font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; margin-top: 3px; }
+  h3.t em { font-style: normal; color: var(--accent); }
+  .lead { font-size: 11.5px; color: var(--text-2); line-height: 1.45; margin-top: 6px; }
+  .cta { display: flex; align-items: center; justify-content: center; height: 46px; border-radius: var(--radius-btn); background: var(--accent); color: var(--on-accent); font-size: 14.5px; font-weight: 700; box-shadow: 0 10px 22px -6px color-mix(in oklab, var(--accent) 45%, transparent); flex-shrink: 0; margin-top: 10px; }
+  .cta.sec { background: transparent; color: var(--text-1); border: 1px solid var(--line); box-shadow: none; }
+  .tabbar { display: flex; align-items: stretch; justify-content: space-around; margin: auto -16px 0; padding: 8px 8px 16px; border-top: 1px solid var(--line); background: color-mix(in oklab, var(--surface) 90%, transparent); flex-shrink: 0; }
+  .tabbar a { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9.5px; font-weight: 600; color: var(--text-2); text-decoration: none; }
+  .tabbar .tab-chip { display: flex; align-items: center; justify-content: center; width: 36px; height: 26px; border-radius: 9px; }
+  .tabbar a.activa { color: var(--accent); }
+  .tabbar a.activa .tab-chip { background: color-mix(in oklab, var(--accent) 16%, transparent); }
+  .pie-fijo { margin-top: auto; padding-bottom: 18px; }
+
+  /* progreso */
+  .pasos { display: flex; gap: 4px; margin-top: 10px; }
+  .pasos i { flex: 1; height: 4px; border-radius: 999px; background: var(--line); }
+  .pasos i.ok { background: var(--accent); }
+  .arriba { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; font-size: 10.5px; font-weight: 600; color: var(--text-2); }
+  .arriba .volver { display: inline-flex; align-items: center; gap: 4px; color: var(--text-1); }
+
+  /* formulario */
+  .campo { margin-top: 11px; }
+  .campo label { display: block; font-size: 10.5px; font-weight: 700; color: var(--text-2); margin-bottom: 5px; letter-spacing: .02em; }
+  .input { display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-btn); font-size: 13px; }
+  .input.foco { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ch { display: inline-flex; align-items: center; height: 30px; padding: 0 11px; border: 1px solid var(--line); border-radius: 999px; font-size: 11.5px; font-weight: 600; background: var(--surface); color: var(--text-1); }
+  .ch.sel { background: color-mix(in oklab, var(--accent) 18%, transparent); border-color: var(--accent); color: var(--accent); }
+  .ayuda { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; padding: 9px 10px; background: color-mix(in oklab, var(--accent) 8%, transparent); border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent); border-radius: 10px; font-size: 10.5px; color: var(--text-2); line-height: 1.45; }
+  .ayuda svg { flex-shrink: 0; margin-top: 1px; color: var(--accent); }
+
+  /* diagnóstico */
+  .preg { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 11px 12px; }
+  .preg h4 { font-family: var(--font-display); font-size: 17px; font-weight: 400; line-height: 1.22; }
+  .preg .ay { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 10.5px; font-weight: 600; color: var(--accent); }
+  .esc { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+  .op { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  .op .r { width: 16px; height: 16px; border-radius: 999px; border: 1.5px solid #4a544d; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .op b { display: block; font-size: 11.5px; line-height: 1.2; }
+  .op span { display: block; font-size: 9.5px; color: var(--text-2); line-height: 1.3; margin-top: 1px; }
+  .op.sel { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 12%, transparent); }
+  .op.sel .r { border-color: var(--accent); }
+  .op.sel .r::after { content: ''; width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+  .extra { display: flex; gap: 6px; margin-top: 8px; }
+  .extra .ch { flex: 1; justify-content: center; font-size: 10.5px; height: 32px; }
+  .guardado { display: flex; align-items: center; gap: 5px; margin-top: 8px; font-size: 9.5px; color: var(--text-2); }
+  .dosbtn { display: flex; gap: 8px; margin-top: 10px; }
+  .dosbtn .cta { margin-top: 0; flex: 1; }
+  .dosbtn .cta.sec { flex: .7; }
+
+  /* resultados */
+  .heroe { margin-top: 10px; border-radius: var(--radius-card); padding: 13px 14px; color: #f1f4ea; position: relative; overflow: hidden;
+    background: radial-gradient(170px 120px at 100% 0%, #5d8a50aa, transparent 70%), linear-gradient(145deg, #2f4d36, #1a2c20); box-shadow: 0 14px 28px -12px rgb(26 44 32 / .7); border: 1px solid rgb(255 255 255 / .08); }
+  .heroe .hl { font-size: 10.5px; font-weight: 600; opacity: .8; }
+  .heroe .hn { font-family: var(--font-display); font-size: 52px; font-weight: 300; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .heroe .hn small { font-family: var(--font-body); font-size: 13px; font-weight: 600; opacity: .75; letter-spacing: 0; }
+  .heroe .hp { display: inline-flex; margin-top: 6px; font-size: 10px; font-weight: 700; background: rgb(255 255 255 / .14); border-radius: 999px; padding: 3px 9px; }
+  .heroe svg.mini { position: absolute; right: 0; bottom: 0; opacity: .55; }
+  .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .bt { background: var(--surface); border-radius: var(--radius-card); padding: 9px 10px 10px; box-shadow: 0 10px 22px -14px rgb(0 0 0 / .7); border: 1px solid rgb(255 255 255 / .06); }
+  .bt .top { display: flex; align-items: center; justify-content: space-between; }
+  .bt .chip { width: 24px; height: 24px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--c); background: color-mix(in oklab, var(--c) 18%, transparent); flex-shrink: 0; }
+  .bt .pt { font-family: var(--font-display); font-size: 21px; font-weight: 400; font-variant-numeric: tabular-nums; }
+  .bt .nm { font-size: 10.5px; font-weight: 700; margin-top: 5px; }
+  .bt .sb { font-size: 8.5px; color: var(--text-2); margin-top: 1px; }
+  .seg { display: flex; gap: 2px; height: 6px; margin-top: 6px; }
+  .seg i { display: block; border-radius: 1px; }
+  .ancho { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; }
+  .ancho p { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+  .ancho p b { color: var(--text-1); }
+
+  /* plan de mejora */
+  .resumen-plan { margin-top: 10px; display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 10px 12px; }
+  .resumen-plan .anillo { width: 44px; height: 44px; flex-shrink: 0; position: relative; }
+  .resumen-plan .anillo span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 14px; }
+  .resumen-plan p { font-size: 11px; color: var(--text-2); line-height: 1.4; }
+  .resumen-plan p b { display: block; font-size: 12.5px; color: var(--text-1); }
+  .filtros { display: flex; gap: 6px; margin-top: 10px; }
+  .filtros .ch { height: 26px; font-size: 10.5px; padding: 0 9px; }
+  .acc-i { margin-top: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 9px 11px; }
+  .acc-i .fila { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .acc-i h5 { font-size: 12px; font-weight: 700; line-height: 1.25; margin-top: 5px; }
+  .acc-i .porque { font-size: 9.5px; color: var(--text-2); margin-top: 3px; }
+  .acc-i .meta { display: flex; align-items: center; justify-content: space-between; margin-top: 7px; font-size: 9.5px; color: var(--text-2); }
+  .tag { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; border-radius: 6px; padding: 2px 6px; border: 1px solid color-mix(in oklab, var(--t) 40%, transparent); color: var(--t); background: color-mix(in oklab, var(--t) 12%, transparent); }
+  .estado { display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 700; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--text-1); }
+  .estado.curso { color: var(--c-eco); border-color: color-mix(in oklab, var(--c-eco) 45%, transparent); }
+  .estado.pend { color: var(--text-2); }
+
+  /* planes */
+  .alterna { display: flex; margin: 12px auto 0; padding: 3px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; width: fit-content; }
+  .alterna span { padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; color: var(--text-2); }
+  .alterna span.on { background: var(--accent); color: var(--on-accent); }
+  .plan { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); padding: 11px 12px; position: relative; }
+  .plan.dest { border: 1.5px solid transparent; background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, color-mix(in oklab, var(--accent) 60%, transparent), transparent 60%) border-box; }
+  .plan .cab { display: flex; justify-content: space-between; align-items: baseline; }
+  .plan h4 { font-family: var(--font-display); font-size: 19px; font-weight: 400; }
+  .plan .precio { font-family: var(--font-display); font-size: 26px; font-weight: 300; font-variant-numeric: tabular-nums; }
+  .plan .precio small { font-family: var(--font-body); font-size: 10.5px; color: var(--text-2); font-weight: 600; }
+  .plan .eq { font-size: 10px; color: var(--text-2); margin-top: 1px; }
+  .plan ul { list-style: none; margin-top: 7px; display: flex; flex-direction: column; gap: 4px; }
+  .plan li { display: flex; align-items: center; gap: 7px; font-size: 11px; }
+  .plan li .ck { width: 14px; height: 14px; border-radius: 999px; background: color-mix(in oklab, var(--accent) 18%, transparent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
+  .plan .insignia { position: absolute; top: -9px; right: 12px; font-size: 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; background: var(--accent); color: var(--on-accent); padding: 3px 8px; border-radius: 999px; }
+  .prueba-nota { display: flex; gap: 7px; align-items: flex-start; margin-top: 10px; font-size: 10.5px; color: var(--text-2); line-height: 1.4; }
+  .prueba-nota svg { flex-shrink: 0; color: var(--accent); margin-top: 1px; }
+  .enlace { text-align: center; margin-top: 9px; font-size: 11.5px; font-weight: 600; color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
+
+  .nota { max-width: 1240px; margin: 44px auto 0; background: #161c22; border: 1px solid #2a3138; border-radius: 12px; padding: 18px 20px; font-size: 13px; line-height: 1.6; color: #b9c4bb; }
+  .nota h2 { font-size: 15px; margin-bottom: 8px; color: #e8ede6; }
+  .nota ul { margin-left: 18px; }
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <h1>Tour de SustentaESG por dentro</h1>
+  <p class="sub">Cinco pantallas de la app con el estilo oscuro aprobado, en el orden en que las vive una persona: <b>cuéntanos de tu empresa → responde el diagnóstico → mira tus resultados → arma tu plan → elige tu plan</b>. Los datos son de una <b>empresa de ejemplo</b>.</p>
+  <div class="salidas" role="list">
+    <span role="listitem"><b>1 · Me encanta</b> — cierro la ficha de diseño</span>
+    <span role="listitem"><b>2 · Ajustar un detalle</b> de alguna pantalla</span>
+    <span role="listitem"><b>3 · Repensar</b> el estilo</span>
+  </div>
+</header>
+
+<section class="tour app">
+
+  <!-- 1 · Recorrido de inicio -->
+  <figure class="vista">
+    <div class="telefono" data-chrome="sin-tabs">
+      <div class="pantalla">
+        <div class="arriba"><span class="volver"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Atrás</span><span>Paso 2 de 4</span></div>
+        <div class="pasos"><i class="ok"></i><i class="ok"></i><i></i><i></i></div>
+        <h3 class="t" style="margin-top:12px">Cuéntanos de <em>tu empresa</em></h3>
+        <p class="lead">Con esto adaptamos las preguntas a tu actividad. No lo usamos para excluirte.</p>
+        <div class="campo"><label>Nombre de la empresa</label><div class="input foco">Empresa de ejemplo S.A.S.</div></div>
+        <div class="campo"><label>Actividad económica</label><div class="chips"><span class="ch">Servicios</span><span class="ch sel">Manufactura</span><span class="ch">Comercio</span><span class="ch">Agro</span><span class="ch">Otra</span></div></div>
+        <div class="campo"><label>Tamaño aproximado</label><div class="chips"><span class="ch">1–10</span><span class="ch sel">11–50</span><span class="ch">51–200</span><span class="ch">200+</span></div></div>
+        <div class="campo"><label>País</label><div class="input">Colombia<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color:#98a39a"><path d="m6 9 6 6 6-6"/></svg></div></div>
+        <div class="ayuda"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><span>Tu prueba de 7 días empieza cuando termines estas preguntas. No pedimos tarjeta.</span></div>
+        <div class="pie-fijo"><div class="cta">Continuar</div></div>
+      </div>
+    </div>
+    <figcaption><span class="num">1</span><b>Recorrido de inicio</b><span>Pocas preguntas, una por vez, con el progreso a la vista. La prueba de 7 días empieza sin tarjeta.</span></figcaption>
+  </figure>
+
+  <!-- 2 · Diagnóstico -->
+  <figure class="vista">
+    <div class="telefono" data-chrome="tabs" data-activa="diagnostico">
+      <div class="pantalla">
+        <div class="arriba"><span class="volver"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Ambiental</span><span>Pregunta 4 de 10</span></div>
+        <div class="pasos"><i class="ok"></i><i class="ok"></i><i class="ok"></i><i class="ok"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="preg">
+          <h4>¿La empresa cuenta con prácticas para separar y gestionar los residuos que genera?</h4>
+          <span class="ay"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg>¿Qué significa esto?</span>
+          <div class="esc" role="radiogroup" aria-label="Nivel de madurez">
+            <div class="op"><span class="r"></span><div><b>0 · No se realiza</b><span>No existe ninguna práctica</span></div></div>
+            <div class="op"><span class="r"></span><div><b>1 · Informal</b><span>Acciones aisladas, sin método</span></div></div>
+            <div class="op sel"><span class="r"></span><div><b>2 · Parcial</b><span>Definida, pero incompleta o irregular</span></div></div>
+            <div class="op"><span class="r"></span><div><b>3 · Implementada</b><span>Se aplica siempre y tiene responsable</span></div></div>
+            <div class="op"><span class="r"></span><div><b>4 · Medida y mejorada</b><span>Se miden resultados y se mejora</span></div></div>
+          </div>
+        </div>
+        <div class="extra"><span class="ch">No aplica</span><span class="ch">No tengo información</span></div>
+        <p class="guardado"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#8fbf7f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Guardado hace 2 segundos · después tendrás 2 preguntas de seguimiento</p>
+        <div class="dosbtn"><div class="cta sec">Anterior</div><div class="cta">Siguiente</div></div>
+      </div>
+    </div>
+    <figcaption><span class="num">2</span><b>Diagnóstico</b><span>Una pregunta por pantalla, con la escala de 0 a 4 explicada y dos salidas honestas: «No aplica» y «No tengo información». Guarda solo.</span></figcaption>
+  </figure>
+
+  <!-- 3 · Resultados -->
+  <figure class="vista">
+    <div class="telefono" data-chrome="tabs" data-activa="resultados">
+      <div class="pantalla">
+        <p class="over">Empresa de ejemplo · 21 oct 2026</p>
+        <h3 class="t">Así va tu <em>sostenibilidad</em></h3>
+        <div class="heroe"><p class="hl">Puntaje general</p><p class="hn">57.2 <small>/ 100</small></p><span class="hp">En desarrollo · 37 de 40 respuestas</span>
+          <svg class="mini" width="120" height="62" viewBox="0 0 120 62" aria-hidden="true"><polyline fill="none" stroke="#b9dca6" stroke-width="1.5" stroke-linejoin="round" points="0,50 14,42 26,48 40,28 54,38 68,18 82,32 96,22 120,30"/><g fill="#8fbf7f"><rect x="78" y="46" width="5" height="16" rx="1"/><rect x="86" y="38" width="5" height="24" rx="1"/><rect x="94" y="30" width="5" height="32" rx="1"/></g><g fill="#c9a66b"><rect x="102" y="36" width="5" height="26" rx="1"/><rect x="110" y="44" width="5" height="18" rx="1"/></g></svg></div>
+        <div class="bento">
+          <div class="bt" style="--c:var(--c-amb)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.4-6"/></svg></span><span class="pt">48.9</span></div><p class="nm">Ambiental</p><p class="sb">9 de 10 preguntas</p><div class="seg"><i style="flex:3;background:var(--s1)"></i><i style="flex:3;background:var(--s2)"></i><i style="flex:2;background:var(--s3)"></i><i style="flex:1;background:var(--s4)"></i></div></div>
+          <div class="bt" style="--c:var(--c-soc)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/><path d="M17 4.5a3.5 3.5 0 0 1 0 7M22 20c0-2.6-1.6-4.6-4-5.5"/></svg></span><span class="pt">61.3</span></div><p class="nm">Social</p><p class="sb">10 de 10 preguntas</p><div class="seg"><i style="flex:1;background:var(--s1)"></i><i style="flex:4;background:var(--s2)"></i><i style="flex:3;background:var(--s3)"></i><i style="flex:2;background:var(--s4)"></i></div></div>
+          <div class="bt" style="--c:var(--c-gob)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8v2h18V8Z"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/></svg></span><span class="pt">52.0</span></div><p class="nm">Gobernanza</p><p class="sb">8 de 10 preguntas</p><div class="seg"><i style="flex:2;background:var(--s1)"></i><i style="flex:3;background:var(--s2)"></i><i style="flex:2;background:var(--s3)"></i><i style="flex:1;background:var(--s4)"></i></div></div>
+          <div class="bt" style="--c:var(--c-eco)"><div class="top"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="pt">66.7</span></div><p class="nm">Económica</p><p class="sb">6 de 6 preguntas</p><div class="seg"><i style="flex:1;background:var(--s1)"></i><i style="flex:1;background:var(--s2)"></i><i style="flex:3;background:var(--s3)"></i><i style="flex:1;background:var(--s4)"></i></div></div>
+          <div class="bt ancho" style="--c:var(--c-soc)"><span class="chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span><p><b>3 preguntas</b> sin información. Complétalas para afinar tu resultado.</p></div>
+        </div>
+        <div class="cta">Ver mi plan de mejora</div>
+      </div>
+    </div>
+    <figcaption><span class="num">3</span><b>Resultados</b><span>Tu puntaje, cada dimensión y cuántas preguntas faltan. Dice «En desarrollo» y que es orientativo; nunca «alto riesgo».</span></figcaption>
+  </figure>
+
+  <!-- 4 · Plan de mejora -->
+  <figure class="vista">
+    <div class="telefono" data-chrome="tabs" data-activa="plan">
+      <div class="pantalla">
+        <p class="over">Empresa de ejemplo</p>
+        <h3 class="t">Tu plan de <em>mejora</em></h3>
+        <div class="resumen-plan">
+          <div class="anillo"><svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="none" stroke="#2a3138" stroke-width="5"/><circle cx="22" cy="22" r="18" fill="none" stroke="#8fbf7f" stroke-width="5" stroke-linecap="round" stroke-dasharray="113" stroke-dashoffset="75" transform="rotate(-90 22 22)"/></svg><span>2/6</span></div>
+          <p><b>2 de 6 acciones listas</b>La próxima vence el 15 de noviembre.</p>
+        </div>
+        <div class="filtros"><span class="ch sel">Todas</span><span class="ch">Pendientes</span><span class="ch">En curso</span><span class="ch">Listas</span></div>
+        <div class="acc-i">
+          <div class="fila"><span class="tag" style="--t:var(--alta)"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 2 21h20Z"/></svg>Prioridad alta</span><span class="estado curso">En curso</span></div>
+          <h5>Hacer un inventario de residuos por tipo y definir puntos de separación</h5>
+          <p class="porque">Sugerida por tus respuestas en AMB04 · Ver por qué</p>
+          <div class="meta"><span>Marta R. · Ambiental</span><span>15 nov</span></div>
+        </div>
+        <div class="acc-i">
+          <div class="fila"><span class="tag" style="--t:var(--media)"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>Prioridad media</span><span class="estado pend">Pendiente</span></div>
+          <h5>Reunir 12 meses de facturas de energía y armar la línea base mensual</h5>
+          <p class="porque">Sugerida por tus respuestas en AMB02 · Ver por qué</p>
+          <div class="meta"><span>Sin responsable · Ambiental</span><span>30 nov</span></div>
+        </div>
+        <div class="acc-i">
+          <div class="fila"><span class="tag" style="--t:var(--baja)"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>Prioridad baja</span><span class="estado pend">Pendiente</span></div>
+          <h5>Definir una carpeta única de evidencias con nombres estandarizados</h5>
+          <p class="porque">Sugerida por tus respuestas en GOB07 · Ver por qué</p>
+          <div class="meta"><span>Luis P. · Gobernanza</span><span>15 dic</span></div>
+        </div>
+      </div>
+    </div>
+    <figcaption><span class="num">4</span><b>Plan de mejora</b><span>Cada acción dice por qué se sugiere, quién la hace y para cuándo. Todo se puede editar. La prioridad se lee con texto y forma, no solo con color.</span></figcaption>
+  </figure>
+
+  <!-- 5 · Planes -->
+  <figure class="vista">
+    <div class="telefono" data-chrome="sin-tabs">
+      <div class="pantalla">
+        <div class="arriba"><span class="volver"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Volver</span><span>Prueba: quedan 5 días</span></div>
+        <h3 class="t" style="margin-top:10px">Elige cómo <em>seguir</em></h3>
+        <p class="lead">Tu diagnóstico y tu historial se quedan contigo. Cancela cuando quieras.</p>
+        <div class="alterna"><span>Mensual</span><span class="on">Anual · ahorras más</span></div>
+        <div class="plan">
+          <div class="cab"><h4>Empresa</h4><span class="precio">US$60<small> /año</small></span></div>
+          <p class="eq">Equivale a US$5 al mes · 1 empresa</p>
+          <ul><li><span class="ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Diagnóstico completo y plan de mejora</li><li><span class="ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Historial y comparación entre periodos</li></ul>
+        </div>
+        <div class="plan dest">
+          <span class="insignia">Para consultores</span>
+          <div class="cab"><h4>Consultor</h4><span class="precio">US$70<small> /año</small></span></div>
+          <p class="eq">Equivale a US$5,8 al mes · hasta 10 empresas</p>
+          <ul><li><span class="ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Todo lo del plan Empresa</li><li><span class="ck"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Un espacio separado por cada empresa</li></ul>
+        </div>
+        <div class="prueba-nota"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><span>No se cobra nada automáticamente. Tú decides cuándo pagar.</span></div>
+        <div class="pie-fijo"><div class="cta">Elegir plan Consultor</div><p class="enlace">Seguir con mi prueba</p></div>
+      </div>
+    </div>
+    <figcaption><span class="num">5</span><b>Pantalla de planes</b><span>Los dos planes, el precio por año y por mes, sin letra chica. Precios de ejemplo (hipótesis tuyas, por validar).</span></figcaption>
+  </figure>
+
+</section>
+
+<section class="nota">
+  <h2>Qué mirar antes de aprobar</h2>
+  <ul>
+    <li>Son maquetas con datos de ejemplo. No hay resultados, clientes ni cifras reales de nadie.</li>
+    <li>El pago aún no está conectado: la pantalla de planes solo muestra cómo se verá. Conectar pagos requiere tu autorización y tiene costos.</li>
+    <li>Cuando apruebes, calculo el contraste de cada color de texto sobre su fondo y dejo la ficha de diseño y los colores listos para construir. Si algún color no pasa la medición, lo ajusto un poco y te lo aviso.</li>
+  </ul>
+</section>
+
+<script>
+  // Marco común de cada teléfono: barra de estado, barra de navegación y línea de inicio.
+  (function () {
+    var estado = '<div class="statusbar"><span>9:41</span><span class="der">' +
+      '<svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.5" y="5" width="3" height="6" rx="0.8"/><rect x="9" y="3" width="3" height="8" rx="0.8"/><rect x="13.5" y="0.5" width="3" height="10.5" rx="0.8"/></svg>' +
+      '<svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.2a9.5 9.5 0 0 1 13 0"/><path d="M3.8 6.6a6.2 6.2 0 0 1 8.4 0"/><path d="M6.2 9a2.8 2.8 0 0 1 3.6 0"/></svg>' +
+      '<svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="15" height="8" rx="1.6" fill="currentColor"/><rect x="22.5" y="3.8" width="2" height="4.4" rx="1" fill="currentColor" opacity="0.4"/></svg></span></div>';
+    var ico = {
+      resultados: '<path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/>',
+      diagnostico: '<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>',
+      plan: '<rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 9h18"/>',
+      historial: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+    };
+    var nombres = { resultados: 'Resultados', diagnostico: 'Diagnóstico', plan: 'Plan', historial: 'Historial' };
+    document.querySelectorAll('.telefono').forEach(function (t) {
+      t.insertAdjacentHTML('afterbegin', estado);
+      t.insertAdjacentHTML('beforeend', '<div class="home-indicator"></div>');
+      if (t.dataset.chrome === 'tabs') {
+        var html = '<nav class="tabbar" aria-label="Navegación">';
+        ['resultados', 'diagnostico', 'plan', 'historial'].forEach(function (k) {
+          html += '<a' + (k === t.dataset.activa ? ' class="activa"' : '') + ' href="#"><span class="tab-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ico[k] + '</svg></span>' + nombres[k] + '</a>';
+        });
+        t.querySelector('.pantalla').insertAdjacentHTML('beforeend', html + '</nav>');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
