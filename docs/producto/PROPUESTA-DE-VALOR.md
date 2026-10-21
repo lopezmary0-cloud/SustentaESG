@@ -9,6 +9,23 @@ Titular corto: **«Deja de reconstruir tus datos de sostenibilidad cada vez que 
 
 Mecanismo (los tres pasos que se muestran en la rueda y la página): **1. Diagnostica** (4 dimensiones + cadena de valor) → **2. Prioriza** (brechas y plan con responsable y fecha) → **3. Demuestra avance** (historial por empresa y comparación entre periodos).
 
+## Posicionamiento elegido: «preparación ante los pedidos de información» (Versión 1 del documento «Propuesta de valor mejorada»)
+El documento propone tres versiones y recomienda la primera como la que se probaría primero (es una hipótesis, no un resultado de estudio):
+- **V1 · Preparación comercial** — ayudar a organizar la información y responder a lo que piden los clientes corporativos. Urgencia alta cuando hay un pedido activo; el problema es concreto y reconocible. ✅ **ELEGIDA**.
+- **V2 · Eficiencia** — convertir información dispersa en diagnósticos, planes e informes, sin matrices manuales. Se usa como beneficio operativo (ahorro de tiempo).
+- **V3 · Gestión continua** — pasar del diagnóstico a la acción y al historial. Menos urgente por sí sola; se usa como mecanismo y como razón para quedarse suscrito (retención).
+Cómo se combinan en la página: la **V1 define para qué existe el producto**, la **V2 pone el titular** («deja de reconstruir tus datos…») y la **V3 explica por qué se queda** (historial, plan y seguimiento).
+
+## Lo que la persona quiere resolver (de la tabla del documento)
+| Problema | Resultado que busca | Dónde se ve en la app |
+|---|---|---|
+| Sus clientes corporativos le piden información ESG | Responder de forma organizada | Resultados + plan + historial por empresa |
+| No sabe qué información debe reunir | Saber qué tiene y qué le falta | Diagnóstico: «sin información» + preguntas pendientes |
+| Su información está en muchos archivos | Centralizarla | Un espacio por empresa |
+| Las asesorías dejan diagnósticos difíciles de actualizar | Mantener el diagnóstico vivo y pasarlo a acciones | Nueva evaluación + plan de mejora |
+| No tiene claridad de sus brechas | Saber qué mejorar y por dónde empezar | Brechas por dimensión y prioridad |
+| Necesita mostrar avances a la dirección o a sus clientes | Información ordenada para comunicar resultados | Historial, comparación y (más adelante) informe descargable |
+
 ## Las tres razones de compra, en orden
 | # | Razón | Para qué sirve en el mensaje | Mensaje base |
 |---|---|---|---|
@@ -38,6 +55,13 @@ La página de ventas usa un titular común (el de tiempo) y dos bloques claros, 
 3. **Se agrega el gatillo de compra** que faltaba: recibir un cuestionario o solicitud de información de sostenibilidad de un cliente, banco o licitación.
 4. **Se pasa de función a resultado:** «tablero» → «sabes en un vistazo qué atender primero».
 5. **Dos puertas de entrada** en lugar de elegir un solo público a ciegas.
+6. **Se elige un posicionamiento** (V1, preparación ante pedidos de información) y se separa de los otros dos, que pasan a ser titular y retención.
+
+## ⚠️ Lo que la página NO puede prometer todavía (alcance real de la primera versión)
+- **Informes descargables (PDF/Excel):** están planeados para después de validar (Etapa 6). Hoy solo se promete «tus resultados ordenados». En la página: «informes» solo cuando existan.
+- **«Evidencias» y «documentos»:** en la primera versión se registran con una **nota o un enlace** (por ejemplo, a la carpeta de Drive del cliente). Subir archivos va después. En la página no se dice «sube tus documentos».
+- **«Gestión de varios clientes»:** sí está en la primera versión (un espacio por empresa, hasta 10 en el plan Consultor).
+- **«Respuestas a cuestionarios de clientes»:** la app no rellena los cuestionarios de terceros; ordena tu información y te dice qué te falta. La página dice «prepárate», no «responde automáticamente».
 
 ## Contexto verificado (para decisiones internas, no para la página)
 - En Colombia el reporte de sostenibilidad es voluntario y no genera sanción (Supersociedades, 21-nov-2025). Por eso no se vende miedo legal.

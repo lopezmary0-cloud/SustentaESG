@@ -25,6 +25,8 @@
 3. (emocional) "Me preocupa entregar un informe con información incompleta o con errores"
 4. (emocional) "No me alcanza el tiempo para conseguir más clientes"
 5. (identidad) "Necesito demostrar resultados, no solo entregar documentos"
+6. (emocional) "Me piden información de sostenibilidad y no sé qué tengo ni qué me falta" (del documento «Propuesta de valor mejorada»)
+7. (superficial) "Los diagnósticos que me entregan quedan viejos y son difíciles de actualizar" (ídem)
 
 ## Deseos (hipótesis, SIN fuente real)
 1. ★ (tangible) "Atender más clientes sin trabajar hasta tarde / sin contratar a nadie"
