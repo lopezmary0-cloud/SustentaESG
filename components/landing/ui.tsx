@@ -287,7 +287,7 @@ export function StickyCtaMobile({
             {ofertaVista ? (estado === 'abriendo' ? 'Abriendo…' : labelComercial) : labelPre}
           </motion.a>
           {ofertaVista && estado === 'fallo' && (
-            <p role="alert" className="mt-2 text-center text-[13px] text-[var(--text-secondary)]">
+            <p role="alert" className="absolute inset-x-4 bottom-full mb-2 rounded-[var(--radius-button)] bg-[var(--surface)] px-3 py-2 text-center text-[13px] text-[var(--text-secondary)] shadow-[var(--shadow-2)]">
               No pudimos abrirlo. Revisa tu conexión y vuelve a tocar el botón.
             </p>
           )}

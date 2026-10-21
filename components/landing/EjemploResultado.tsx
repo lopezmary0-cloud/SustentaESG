@@ -89,7 +89,7 @@ export function EjemploResultado() {
       </ul>
 
       <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2 border-t border-[color-mix(in_oklab,var(--text-tertiary)_25%,transparent)] pt-4 text-xs text-[var(--text-secondary)]">
-        <li className="w-full font-semibold">Cada barra muestra cómo se reparten tus respuestas:</li>
+        <li className="w-full font-semibold">Cada barra muestra cómo se reparten tus respuestas. Nivel 0 = no se hace · Nivel 4 = se mide y se mejora.</li>
         {NIVELES.map((n) => (
           <li key={n.etiqueta} className="flex items-center gap-2">
             <span aria-hidden="true" className="size-2 rounded-sm" style={{ background: n.color }} />
