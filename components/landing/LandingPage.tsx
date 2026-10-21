@@ -3,12 +3,12 @@
 // Página de ventas de SustentaESG — las 10 secciones canónicas de 19, en orden.
 // Todo el copy sale de docs/copy/landing.md (trazado a FICHA-AVATAR.md). Estilo: FICHA-ARTE.md.
 
-import { FileSpreadsheet, Repeat, SearchX } from 'lucide-react';
+import { Clock, FileSpreadsheet, RotateCcw, SearchX, TrendingUp } from 'lucide-react';
 import { Hero } from './Hero';
 import { EjemploResultado } from './EjemploResultado';
 import { HeroVisual } from './HeroVisual';
 import { Problema } from './Problema';
-import { Agitacion } from './Agitacion';
+import { AgitacionCosto } from './AgitacionCosto';
 import { Solucion } from './Solucion';
 import { AppPorDentro } from './AppPorDentro';
 import { OfertaPorPerfil } from './OfertaPorPerfil';
@@ -16,7 +16,7 @@ import { Garantia } from './Garantia';
 import { Faq } from './Faq';
 import { CtaFinal } from './CtaFinal';
 import { FooterLegal } from './FooterLegal';
-import { StickyCtaMobile } from './ui';
+import { CtaButton, StickyCtaMobile } from './ui';
 import { ANIO_COPYRIGHT, APP_NAME, CTA_HREF, CTA_LABEL, SOPORTE_EMAIL } from '@/lib/site';
 
 export function LandingPage() {
@@ -35,22 +35,16 @@ export function LandingPage() {
 
       {/* 2. PROBLEMA */}
       <Problema
-        titulo="¿Te suena?"
+        titulo="¿Rehaces tu diagnóstico cada vez que te lo piden?"
         preguntas={[
-          { icon: Repeat, textoMarked: '¿Rehaces el mismo diagnóstico [b]cada vez[/b] que te piden información?' },
           { icon: FileSpreadsheet, textoMarked: '¿Tienes todo en Excel y [b]no sabes cuál es la última versión[/b]?' },
           { icon: SearchX, textoMarked: '¿Te piden datos y [b]no sabes qué tienes ni qué te falta[/b]?' },
+          { icon: TrendingUp, textoMarked: '¿Necesitas mostrar avances y [b]solo tienes documentos sueltos[/b]?' },
         ]}
       />
 
       {/* 3. AGITACIÓN */}
-      <Agitacion
-        frases={[
-          'Cada pedido de información te obliga a [b]volver a juntar los mismos datos[/b].',
-          'Mientras buscas la última versión, [acento]se va el tiempo[/acento] que podrías dedicar a mejorar.',
-          'Las plantillas guardan datos, pero [b]no te dicen qué falta ni qué hacer primero[/b].',
-        ]}
-      />
+      <AgitacionCosto />
 
       {/* 4. SOLUCIÓN — mecanismo bautizado: la Rueda de Madurez */}
       <Solucion
@@ -69,6 +63,7 @@ export function LandingPage() {
           labelDespues: 'Después',
           despues: 'Un espacio por empresa con tu diagnóstico, tu plan y tu historial.',
         }}
+        cta={<CtaButton href={CTA_HREF}>{CTA_LABEL}</CtaButton>}
       />
 
       {/* 5. LA APP POR DENTRO — vistas previas del diseño (la app se está construyendo) */}
@@ -94,8 +89,13 @@ export function LandingPage() {
       {/* 7. GARANTÍA */}
       <Garantia
         nombre="La Garantía del Primer Diagnóstico"
-        condicionMarked="Pruebas 7 días gratis y, solo si decides pagar, tienes 14 días para pedir tu reembolso. [b]Si tu primer diagnóstico no te sirve, te devolvemos tu dinero[/b]. Sin preguntas."
+        condicionMarked="Si tu primer diagnóstico no te sirve, [b]te devolvemos tu dinero[/b]. Sin preguntas."
+        cajas={[
+          { icon: Clock, titulo: '7 días gratis', detalle: 'Sin tarjeta y sin cobro automático.' },
+          { icon: RotateCcw, titulo: '14 días para pedir tu reembolso', detalle: 'Solo si decides pagar.' },
+        ]}
         pisoLegal="Un correo basta para pedirlo"
+        cta={<CtaButton href={CTA_HREF}>{CTA_LABEL}</CtaButton>}
       />
 
       {/* 8. FAQ */}
@@ -140,7 +140,7 @@ export function LandingPage() {
         ctaLabel={CTA_LABEL}
         ctaHref={CTA_HREF}
         recap="Garantía del Primer Diagnóstico · 7 días gratis sin tarjeta"
-        psMarked="PS: SustentaESG ordena tu diagnóstico, tu plan y tu historial con la Rueda de Madurez, un espacio por empresa. Hoy empiezas con 7 días gratis, sin tarjeta, y la Garantía del Primer Diagnóstico."
+        psMarked="PS: Hoy entras con 7 días gratis, sin tarjeta, y con la Garantía del Primer Diagnóstico."
       />
 
       {/* 10. FOOTER LEGAL — todas las páginas enlazadas existen */}

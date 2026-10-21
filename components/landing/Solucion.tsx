@@ -39,6 +39,8 @@ export interface SolucionProps {
   };
   /** Ejemplo de resultado (prueba concreta del mecanismo), rotulado como ejemplo por quien lo pasa. */
   ejemplo?: ReactNode;
+  /** CTA repetido tras el mecanismo (mismo verbo y destino que el hero). */
+  cta?: ReactNode;
   id?: string;
 }
 
@@ -50,6 +52,7 @@ export function Solucion({
   pasos,
   antesDespues,
   ejemplo,
+  cta,
   id,
 }: SolucionProps) {
   warnCopy('Solución → título', tituloMarked, 8);
@@ -123,6 +126,11 @@ export function Solucion({
                 {antesDespues.despues}
               </p>
             </div>
+          </motion.div>
+        )}
+        {cta && (
+          <motion.div variants={item} className="mt-10 flex justify-center">
+            {cta}
           </motion.div>
         )}
       </motion.div>

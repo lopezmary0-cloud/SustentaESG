@@ -7,6 +7,7 @@
 // Nunca placeholders ("garantía visible"): se nombra la política concreta o la
 // sección no se monta (52 §5). El plazo = el configurado en Hotmart (19 §7).
 
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { Lock, ShieldCheck } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -22,10 +23,14 @@ export interface GarantiaProps {
   pisoLegal?: string;
   /** default ShieldCheck (Lucide) — siempre SVG. */
   icon?: LucideIcon;
+  /** Plazos en cajas cortas con ícono (escaneables en mobile): reemplazan el párrafo largo. */
+  cajas?: { icon: LucideIcon; titulo: string; detalle: string }[];
+  /** CTA repetido tras la garantía (mismo verbo y destino que el hero). */
+  cta?: ReactNode;
   id?: string;
 }
 
-export function Garantia({ nombre, condicionMarked, pisoLegal, icon: Icono = ShieldCheck, id }: GarantiaProps) {
+export function Garantia({ nombre, condicionMarked, pisoLegal, icon: Icono = ShieldCheck, cajas, cta, id }: GarantiaProps) {
   warnCopy('Garantía → condición', condicionMarked, 30);
   const { contenedor, item } = useReveal();
 
@@ -54,6 +59,22 @@ export function Garantia({ nombre, condicionMarked, pisoLegal, icon: Icono = Shi
               <p className="max-w-[44ch] text-[15px] leading-[1.6] text-[var(--text-secondary)]">
                 <MarkedCopy text={condicionMarked} />
               </p>
+              {cajas && (
+                <ul className="grid w-full grid-cols-1 gap-3 text-left sm:grid-cols-2">
+                  {cajas.map((c) => (
+                    <li
+                      key={c.titulo}
+                      className="flex items-start gap-3 rounded-[var(--radius-card)] bg-[var(--bg)] p-4"
+                    >
+                      <c.icon size={22} strokeWidth={1.8} color="var(--accent)" aria-hidden="true" className="mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-[16px] font-semibold leading-snug text-[var(--text-primary)]">{c.titulo}</p>
+                        <p className="mt-0.5 text-[14px] leading-snug text-[var(--text-secondary)]">{c.detalle}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
               {pisoLegal && (
                 <p className="flex items-center gap-1.5 text-[13px] text-[var(--text-tertiary)]">
                   <Lock size={14} aria-hidden="true" />
@@ -63,6 +84,11 @@ export function Garantia({ nombre, condicionMarked, pisoLegal, icon: Icono = Shi
             </div>
           </Hairline>
         </motion.div>
+        {cta && (
+          <motion.div variants={item} className="mt-8 flex justify-center">
+            {cta}
+          </motion.div>
+        )}
       </motion.div>
     </SectionShell>
   );

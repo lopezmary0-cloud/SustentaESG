@@ -1,4 +1,4 @@
-# Copy de la página de ventas — SustentaESG (v1.1, 2026-10-21 — ajustado tras la primera revisión independiente)
+# Copy de la página de ventas — SustentaESG (v1.2, 2026-10-21 — elevada con las reglas de escaneabilidad mobile)
 
 > Marcado: `[acento]…[/acento]` = palabra que vende (color de acento) · `[b]…[/b]` = palabra importante.
 > Todo se traza a FICHA-AVATAR.md (aprobada 2026-10-21) y a docs/producto/PROPUESTA-DE-VALOR.md.
@@ -74,3 +74,11 @@
 
 ## Lo que NO dice la página (por diseño)
 Sin cifras de clientes ni de mercado · sin testimonios · sin «auditable», «certificación», «cumplimiento garantizado» · sin «evita perder contratos» · sin «sin consultores» · sin porcentajes ni minutos de ahorro · sin «informes descargables» ni «sube tus documentos» (aún no existen).
+
+## v1.2 — cambios A–E (aprobados por el usuario el 2026-10-21)
+- A. Problema: título «¿Rehaces tu diagnóstico cada vez que te lo piden?» + 3 preguntas con ícono (dolores 2, 6 y 5 de la ficha).
+- B. Agitación: título «Cada pedido te cuesta [acento]volver a empezar[/acento]» + 3 mini-tarjetas con ícono (Rehaces / Buscas / Adivinas) + calculadora de costo de rehacer con los números de la persona (horas por informe × informes al año; ejemplo precargado 4 × 6 = 24 horas ≈ 3 jornadas, rotulado como ejemplo; sin cifras inventadas).
+- C. Garantía: condición de 1 línea («Si tu primer diagnóstico no te sirve, [b]te devolvemos tu dinero[/b]. Sin preguntas.») + 2 cajas: «7 días gratis — sin tarjeta y sin cobro automático» · «14 días para pedir tu reembolso — solo si decides pagar».
+- D. Botón «Iniciar mi diagnóstico gratis» repetido tras el mecanismo, tras la app por dentro, tras la garantía, en la oferta, en el cierre y en la barra fija.
+- E. PS: «PS: Hoy entras con 7 días gratis, sin tarjeta, y con la Garantía del Primer Diagnóstico.»
+- Sin cambio consciente: carrusel manual (19 §5 prohíbe el avance automático).
