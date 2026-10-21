@@ -153,16 +153,40 @@ export function CtaButton({
   alto?: 52 | 56;
   fullMobile?: boolean;
 }) {
+  // Estado de carga: feedback inmediato al tocar, sin doble toque. Si la navegación no llega
+  // a ocurrir (sin conexión), a los 8 s el botón vuelve a su estado normal y avisa qué hacer.
+  const [estado, setEstado] = useState<'reposo' | 'abriendo' | 'fallo'>('reposo');
+  useEffect(() => {
+    if (estado !== 'abriendo') return;
+    const t = setTimeout(() => setEstado('fallo'), 8000);
+    return () => clearTimeout(t);
+  }, [estado]);
+
   return (
-    <motion.a
-      whileTap={{ scale: 0.97 }}
-      href={href}
-      className={`inline-flex items-center justify-center rounded-[var(--radius-button)] bg-[var(--accent)] px-8 text-[17px] font-semibold text-[var(--bg)] shadow-[0_8px_30px_color-mix(in_oklab,var(--accent)_25%,transparent)] transition-colors duration-150 hover:bg-[color-mix(in_oklab,var(--accent)_88%,var(--text-primary))] [touch-action:manipulation] ${
-        alto === 56 ? 'h-14' : 'h-[52px]'
-      } ${fullMobile ? 'w-full sm:w-auto' : ''}`}
-    >
-      {children}
-    </motion.a>
+    <span className={`inline-flex flex-col items-center ${fullMobile ? 'w-full sm:w-auto' : ''}`}>
+      <motion.a
+        whileTap={{ scale: 0.97 }}
+        href={href}
+        aria-busy={estado === 'abriendo'}
+        onClick={(e) => {
+          if (estado === 'abriendo') {
+            e.preventDefault();
+            return;
+          }
+          setEstado('abriendo');
+        }}
+        className={`inline-flex w-full items-center justify-center whitespace-nowrap rounded-[var(--radius-button)] bg-[var(--accent)] px-4 text-center text-[16px] font-semibold text-[var(--bg)] shadow-[0_8px_30px_color-mix(in_oklab,var(--accent)_25%,transparent)] transition-colors duration-150 hover:bg-[color-mix(in_oklab,var(--accent)_88%,var(--text-primary))] sm:w-auto sm:px-8 sm:text-[17px] [touch-action:manipulation] ${
+          alto === 56 ? 'h-14' : 'h-[52px]'
+        }`}
+      >
+        {estado === 'abriendo' ? 'Abriendo…' : children}
+      </motion.a>
+      {estado === 'fallo' && (
+        <span role="alert" className="mt-2 text-[13px] text-[var(--text-secondary)]">
+          No pudimos abrirlo. Revisa tu conexión y vuelve a tocar el botón.
+        </span>
+      )}
+    </span>
   );
 }
 

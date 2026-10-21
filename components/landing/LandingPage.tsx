@@ -91,7 +91,7 @@ export function LandingPage() {
 
       {/* 7. GARANTÍA */}
       <Garantia
-        nombre="la Garantía del Primer Diagnóstico"
+        nombre="La Garantía del Primer Diagnóstico"
         condicionMarked="Pruebas 7 días gratis y, solo si decides pagar, tienes 14 días para pedir tu reembolso. [b]Si tu primer diagnóstico no te sirve, te devolvemos tu dinero[/b]. Sin preguntas."
         pisoLegal="Un correo basta para pedirlo"
       />
