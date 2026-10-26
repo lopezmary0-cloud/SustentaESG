@@ -13,13 +13,15 @@ import { RuedaMini } from '@/components/flujo/RuedaMini';
 import { track } from '@/lib/analytics';
 import { MODO_DEMO, sesionActual } from '@/lib/auth';
 import { guardarPlan, leerInicio, leerPlan, perfilSugerido, type Ciclo, type Perfil } from '@/lib/demo/store';
+import { NOMBRE_DIMENSION } from '@/lib/diagnostico/banco';
+import { lecturaRapida } from '@/lib/diagnostico/rapida';
 import { PLANES } from '@/lib/planes';
 import { TRIAL_DIAS } from '@/lib/site';
 import { useMontado } from '@/lib/useMontado';
 
 const LINEA_TIEMPO = [
   { icono: Sparkles, cuando: 'Hoy', titulo: 'Empiezas' },
-  { icono: CalendarCheck, cuando: 'Día 5', titulo: 'Te avisamos' },
+  { icono: CalendarCheck, cuando: 'Día 5', titulo: 'Aviso' },
   { icono: Flag, cuando: `Día ${TRIAL_DIAS}`, titulo: 'Decides' },
 ];
 
@@ -42,6 +44,7 @@ function PlanesCliente() {
   const [perfil, setPerfil] = useState<Perfil>(() => leerPlan()?.perfil ?? perfilSugerido(leerInicio()));
   const [ciclo, setCiclo] = useState<Ciclo>(() => leerPlan()?.ciclo ?? 'anual');
   const [empresa] = useState(() => leerInicio().empresa);
+  const [lectura] = useState(() => lecturaRapida(leerInicio().rapida));
   const [conSesion] = useState(() => sesionActual() !== null);
   const [abriendo, setAbriendo] = useState(false);
   const plan = PLANES[perfil];
@@ -58,11 +61,19 @@ function PlanesCliente() {
         <h1 className="text-balance text-3xl font-bold leading-tight [font-family:var(--font-display)]">
           Deja de reconstruir tus datos: <span className="text-[var(--accent)]">empieza hoy</span>
         </h1>
-        <RuedaMini tamano={80} />
+        <RuedaMini tamano={56} />
       </div>
       <p className="mt-2 text-base text-[var(--text-secondary)]">
         {TRIAL_DIAS} días gratis, sin tarjeta. Cuando un cliente o un banco te pida información, que ya esté ordenada.
       </p>
+
+      {lectura.completa && (lectura.fortaleza || lectura.atencion.length > 0) && (
+        <p className="mt-4 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent)_35%,transparent)] bg-[var(--chip-bg)] p-3 text-sm leading-relaxed">
+          <strong className="font-semibold">Tu lectura rápida:</strong>{' '}
+          {lectura.fortaleza && <>punto fuerte, {NOMBRE_DIMENSION[lectura.fortaleza]}; </>}
+          {lectura.atencion.length > 0 && <>por dónde empezar, {lectura.atencion.map((d) => NOMBRE_DIMENSION[d]).join(' y ')}.</>}
+        </p>
+      )}
 
       <ol className="mt-6 grid grid-cols-[repeat(3,minmax(0,1fr))] gap-3" aria-label="Qué pasa durante la prueba">
         {LINEA_TIEMPO.map((paso) => (
@@ -181,6 +192,7 @@ function PlanesCliente() {
         >
           {abriendo ? 'Abriendo…' : `Empezar mis ${TRIAL_DIAS} días gratis`}
         </Link>
+        <p className="mt-3 text-center text-sm text-[var(--text-secondary)]">Sin tarjeta. No se cobra nada automáticamente.</p>
         <Link href="/" className="mx-auto mt-2 flex h-12 w-fit items-center px-4 text-sm text-[var(--text-secondary)] underline">
           Ahora no
         </Link>

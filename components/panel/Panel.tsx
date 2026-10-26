@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, useReducedMotion } from 'motion/react';
-import { Building2, CalendarClock, ChevronRight, ClipboardList, History, LogOut } from 'lucide-react';
-import { BANCO, DIMENSIONES } from '@/lib/diagnostico/banco';
+import { Building2, CalendarClock, Check, ChevronRight, ClipboardList, History, LogOut } from 'lucide-react';
+import { BANCO, DIMENSIONES, NOMBRE_DIMENSION } from '@/lib/diagnostico/banco';
 import { useEvaluacion } from '@/lib/diagnostico/almacen';
 import { calcularDiagnostico } from '@/lib/diagnostico/motor';
 import { useEmpresaActiva } from '@/lib/empresas/almacen';
@@ -16,7 +16,8 @@ import type { Empresa } from '@/lib/empresas/reglas';
 import { useHistorial } from '@/lib/historial/almacen';
 import { Marco } from '@/components/flujo/Marco';
 import { cerrarSesion, MODO_DEMO, sesionActual } from '@/lib/auth';
-import { leerPlan, type Cuenta } from '@/lib/demo/store';
+import { leerInicio, leerPlan, type Cuenta } from '@/lib/demo/store';
+import { lecturaRapida } from '@/lib/diagnostico/rapida';
 import { TRIAL_DIAS } from '@/lib/site';
 import { usePlanDeMejora } from '@/lib/plan/almacen';
 import { useCuenta } from '@/lib/useCuenta';
@@ -79,6 +80,16 @@ function PanelEmpresa({ cuenta, empresa, totalEmpresas }: { cuenta: Cuenta; empr
   const completo = respondidas === BANCO.length;
   const general = calcularDiagnostico(evaluacion.respuestas).general;
   const puntajeVisible = useCuenta(general.puntaje === null ? 0 : Math.round(general.puntaje));
+  const [lectura] = useState(() => lecturaRapida(leerInicio().rapida));
+  const lecturaHecha = lectura.completa;
+  // «Primeros pasos»: la lectura rápida se hizo en el recorrido de inicio, solo vale para la primera empresa.
+  const pasos = [
+    ...(empresa.id === 'principal' ? [{ texto: 'Haz tu lectura rápida', hecho: lecturaHecha, href: '/onboarding' }] : []),
+    { texto: 'Completa tu diagnóstico de 40 preguntas', hecho: completo, href: '/app/diagnostico' },
+    { texto: 'Añade tu primera acción al plan', hecho: plan_.acciones.length > 0, href: '/app/plan' },
+    { texto: 'Guarda tu primera fotografía en el historial', hecho: historial.fotografias.length > 0, href: '/app/resultados' },
+  ];
+  const pasosHechos = pasos.filter((p) => p.hecho).length;
   const [diasRestantes] = useState(() =>
     Math.max(0, TRIAL_DIAS - Math.floor((Date.now() - cuenta.pruebaInicio) / DIA_MS))
   );
@@ -145,6 +156,17 @@ function PanelEmpresa({ cuenta, empresa, totalEmpresas }: { cuenta: Cuenta; empr
           <p className="mt-1 text-sm text-[var(--text-secondary)]">
             {completo ? 'Respondiste las 40 preguntas.' : `${respondidas} de ${BANCO.length} preguntas respondidas.`}
             {general.estado === 'provisional' && ' Resultado provisional.'}
+          </p>
+        )}
+
+        {lecturaHecha && empresa.id === 'principal' && (lectura.fortaleza || lectura.atencion.length > 0) && (
+          <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+            <strong className="font-semibold text-[var(--text-primary)]">Tu lectura rápida:</strong>{' '}
+            {lectura.fortaleza && <>punto fuerte, {NOMBRE_DIMENSION[lectura.fortaleza]}; </>}
+            {lectura.atencion.length > 0 && <>por dónde empezar, {lectura.atencion.map((d) => NOMBRE_DIMENSION[d]).join(' y ')}.</>}{' '}
+            <Link href="/onboarding" className="font-medium text-[var(--accent)] underline">
+              Verla
+            </Link>
           </p>
         )}
 
@@ -224,8 +246,45 @@ function PanelEmpresa({ cuenta, empresa, totalEmpresas }: { cuenta: Cuenta; empr
         </motion.section>
       )}
 
+      {pasosHechos < pasos.length && (
+        <motion.section
+          {...entrada(2)}
+          aria-label="Primeros pasos"
+          className="mt-4 rounded-[var(--radius-card)] bg-[var(--surface)] p-5 shadow-[var(--shadow-1)]"
+        >
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-lg font-semibold">Primeros pasos</h2>
+            <p className="text-sm tabular-nums text-[var(--text-secondary)]">
+              {pasosHechos} de {pasos.length}
+            </p>
+          </div>
+          <ul className="mt-3 flex flex-col">
+            {pasos.map((p) => (
+              <li key={p.texto}>
+                <Link
+                  href={p.href}
+                  className="flex min-h-12 items-center gap-3 py-2 text-base [touch-action:manipulation]"
+                  aria-label={`${p.texto}${p.hecho ? ' (hecho)' : ''}`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`flex size-6 shrink-0 items-center justify-center rounded-full ${
+                      p.hecho ? 'bg-[var(--accent)]' : 'border border-[color-mix(in_oklab,var(--text-tertiary)_55%,transparent)]'
+                    }`}
+                  >
+                    {p.hecho && <Check size={14} strokeWidth={3} color="var(--bg)" />}
+                  </span>
+                  <span className={p.hecho ? 'text-[var(--text-secondary)] line-through decoration-1' : 'font-medium'}>{p.texto}</span>
+                  {!p.hecho && <ChevronRight size={16} className="ml-auto shrink-0 text-[var(--text-tertiary)]" aria-hidden="true" />}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.section>
+      )}
+
       <motion.section
-        {...entrada(2)}
+        {...entrada(3)}
         aria-label="Tu prueba gratis"
         className="mt-4 flex items-center gap-4 rounded-[var(--radius-card)] bg-[var(--surface)] p-5 shadow-[var(--shadow-1)]"
       >

@@ -7,11 +7,21 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, animate, motion, useReducedMotion } from 'motion/react';
-import { AlertCircle, Check, Layers, Leaf, RotateCcw, Scale, TrendingUp, Users } from 'lucide-react';
+import { AlertCircle, Check, Flag, RotateCcw, Sparkles } from 'lucide-react';
+import { LecturaRapidaCard } from '@/components/onboarding/LecturaRapidaCard';
+import { NOMBRE_DIMENSION } from '@/lib/diagnostico/banco';
 import { Marco } from '@/components/flujo/Marco';
 import { Opciones, type Opcion } from '@/components/flujo/Opciones';
 import { RuedaMini } from '@/components/flujo/RuedaMini';
 import { track } from '@/lib/analytics';
+import {
+  lecturaRapida,
+  OPCIONES_RAPIDAS,
+  PREGUNTAS_RAPIDAS,
+  type DimRapida,
+  type RespuestaRapida,
+  type ValorRapido,
+} from '@/lib/diagnostico/rapida';
 import { TRIAL_DIAS } from '@/lib/site';
 import { useMontado } from '@/lib/useMontado';
 import {
@@ -43,14 +53,6 @@ const MOTIVOS_OPCIONES: Opcion<Motivo>[] = [
   { id: 'ordenar', titulo: 'Ordenar o arrancar mi sostenibilidad', detalle: 'Tengo datos dispersos o parto de cero.' },
 ];
 
-const RESULTADO_POR_MOTIVO: Record<Motivo, string> = {
-  cliente: 'Dejarás ordenada la información que te piden clientes y bancos, en un solo lugar.',
-  direccion: 'Tendrás cada dimensión resumida, lista para mostrarla a tu dirección.',
-  ordenar: 'Verás qué ya tienen y qué falta, dimensión por dimensión.',
-  cero: 'Empezarás por lo básico y sabrás por dónde seguir.',
-  otra: 'Empezarás por lo que más te importa y verás cómo avanzas.',
-};
-
 const TAMANO_TEXTO: Record<Tamano, string> = {
   '1-10': 'de 1 a 10 personas',
   '11-50': 'de 11 a 50 personas',
@@ -58,7 +60,9 @@ const TAMANO_TEXTO: Record<Tamano, string> = {
   '200+': 'de más de 200 personas',
 };
 
-const TOTAL_PASOS = 4;
+/** 4 de contexto (rol, empresa, tamaño, motivo) + 4 de la lectura rápida (una por dimensión). */
+const PASOS_CONTEXTO = 4;
+const TOTAL_PASOS = PASOS_CONTEXTO + PREGUNTAS_RAPIDAS.length;
 const EASE = [0.32, 0.72, 0.0, 1] as const;
 
 type Fase = { tipo: 'pregunta'; paso: number } | { tipo: 'construyendo' } | { tipo: 'lista' };
@@ -68,7 +72,9 @@ function faseInicial(r: RespuestasInicio): Fase {
   if (!r.rol) return { tipo: 'pregunta', paso: 0 };
   if (!r.empresa || !r.actividad) return { tipo: 'pregunta', paso: 1 };
   if (!r.tamano) return { tipo: 'pregunta', paso: 2 };
-  return { tipo: 'pregunta', paso: 3 };
+  if (!r.motivo) return { tipo: 'pregunta', paso: 3 };
+  const sinResponder = PREGUNTAS_RAPIDAS.findIndex((p) => r.rapida?.[p.dimension] === undefined);
+  return { tipo: 'pregunta', paso: PASOS_CONTEXTO + Math.max(0, sinResponder) };
 }
 
 /** Solo se monta en el navegador: las respuestas viven en localStorage y no existen al renderizar en el servidor. */
@@ -154,7 +160,14 @@ function RecorridoCliente() {
   const salida = reduce ? { opacity: 0 } : { opacity: 0, x: -16 };
 
   return (
-    <Marco atras={atras} progreso={progreso} progresoEtiqueta={etiquetaProgreso}>
+    <Marco
+      atras={atras}
+      progreso={progreso}
+      progresoEtiqueta={etiquetaProgreso}
+      segmentos={Array.from({ length: TOTAL_PASOS }, (_, i) =>
+        fase.tipo !== 'pregunta' ? 1 : i < fase.paso ? 1 : i === fase.paso ? 0.4 : 0
+      )}
+    >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={claveFase}
@@ -167,7 +180,7 @@ function RecorridoCliente() {
           {fase.tipo === 'pregunta' && fase.paso === 0 && (
             <Pregunta
               refTitulo={titulo}
-              pasoTexto={`Pregunta 1 de ${TOTAL_PASOS}`}
+              pasoTexto={`Paso 1 de ${TOTAL_PASOS}`}
               titulo="¿Cómo llevas la sostenibilidad?"
               ayuda="Así ajustamos el lenguaje y los planes a tu caso."
             >
@@ -205,7 +218,7 @@ function RecorridoCliente() {
           {fase.tipo === 'pregunta' && fase.paso === 2 && (
             <Pregunta
               refTitulo={titulo}
-              pasoTexto={`Pregunta 3 de ${TOTAL_PASOS}`}
+              pasoTexto={`Paso 3 de ${TOTAL_PASOS}`}
               titulo="¿Cuántas personas trabajan ahí?"
               ayuda="Una estimación basta; puedes cambiarla después."
             >
@@ -216,14 +229,14 @@ function RecorridoCliente() {
           {fase.tipo === 'pregunta' && fase.paso === 3 && (
             <Pregunta
               refTitulo={titulo}
-              pasoTexto={`Pregunta 4 de ${TOTAL_PASOS}`}
+              pasoTexto={`Paso 4 de ${TOTAL_PASOS}`}
               titulo="¿Para qué lo necesitas ahora?"
               ayuda="Elige lo más cercano a tu situación."
             >
               <Opciones
                 opciones={MOTIVOS_OPCIONES}
                 valor={respuestas.motivo}
-                onElegir={(motivo) => elegirYAvanzar({ motivo, motivoTexto: undefined }, 4)}
+                onElegir={(motivo) => elegirYAvanzar({ motivo, motivoTexto: undefined }, PASOS_CONTEXTO)}
                 otra={{
                   id: 'otra',
                   etiqueta: 'Otra razón',
@@ -231,11 +244,20 @@ function RecorridoCliente() {
                   textoInicial: respuestas.motivoTexto,
                   onGuardar: (texto) => {
                     guardar({ motivo: 'otra', motivoTexto: texto });
-                    irAPaso(4);
+                    irAPaso(PASOS_CONTEXTO);
                   },
                 }}
               />
             </Pregunta>
+          )}
+
+          {fase.tipo === 'pregunta' && fase.paso >= PASOS_CONTEXTO && (
+            <PreguntaRapida
+              refTitulo={titulo}
+              indice={fase.paso - PASOS_CONTEXTO}
+              respuesta={respuestas.rapida?.[PREGUNTAS_RAPIDAS[fase.paso - PASOS_CONTEXTO].dimension]}
+              onResponder={(dimension, valor) => elegirYAvanzar({ rapida: { ...respuestas.rapida, [dimension]: valor } }, fase.paso + 1)}
+            />
           )}
 
           {fase.tipo === 'construyendo' && (
@@ -250,7 +272,16 @@ function RecorridoCliente() {
             />
           )}
 
-          {fase.tipo === 'lista' && <RutaLista refTitulo={titulo} respuestas={respuestas} onReiniciar={reiniciar} />}
+          {fase.tipo === 'lista' && (
+            <RutaLista
+              refTitulo={titulo}
+              respuestas={respuestas}
+              onReiniciar={reiniciar}
+              onEditarDimension={(dimension) =>
+                setFase({ tipo: 'pregunta', paso: PASOS_CONTEXTO + PREGUNTAS_RAPIDAS.findIndex((p) => p.dimension === dimension) })
+              }
+            />
+          )}
         </motion.div>
       </AnimatePresence>
     </Marco>
@@ -262,12 +293,16 @@ function Pregunta({
   titulo,
   ayuda,
   refTitulo,
+  pie = 'Sin tarjeta. Tus respuestas quedan guardadas.',
+  tituloMediano = false,
   children,
 }: {
   pasoTexto: string;
   titulo: string;
   ayuda: string;
   refTitulo: React.RefObject<HTMLHeadingElement | null>;
+  pie?: string;
+  tituloMediano?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -276,16 +311,60 @@ function Pregunta({
       <h1
         ref={refTitulo}
         tabIndex={-1}
-        className="mt-2 text-balance text-3xl font-bold leading-tight outline-none [font-family:var(--font-display)]"
+        className={`mt-2 text-balance font-bold leading-tight outline-none [font-family:var(--font-display)] ${tituloMediano ? 'text-2xl' : 'text-3xl'}`}
       >
         {titulo}
       </h1>
       <p className="mt-2 text-base text-[var(--text-secondary)]">{ayuda}</p>
       <div className="mt-8">{children}</div>
-      <p className="mt-auto pt-8 text-center text-sm text-[var(--text-secondary)]">
-        Sin tarjeta. Tus respuestas quedan guardadas.
-      </p>
+      <p className="mt-auto pt-8 text-center text-sm text-[var(--text-secondary)]">{pie}</p>
     </>
+  );
+}
+
+const ID_RAPIDA = (v: ValorRapido) => `v${v}` as const;
+type IdRapida = ReturnType<typeof ID_RAPIDA>;
+
+/** Una de las 4 preguntas de la lectura rápida (una por dimensión). */
+function PreguntaRapida({
+  refTitulo,
+  indice,
+  respuesta,
+  onResponder,
+}: {
+  refTitulo: React.RefObject<HTMLHeadingElement | null>;
+  indice: number;
+  respuesta: RespuestaRapida | undefined;
+  onResponder: (dimension: DimRapida, valor: RespuestaRapida) => void;
+}) {
+  const p = PREGUNTAS_RAPIDAS[indice];
+  const opciones = OPCIONES_RAPIDAS.map((o) => ({ id: ID_RAPIDA(o.valor), titulo: o.titulo, detalle: o.detalle }));
+  const ultima = indice === PREGUNTAS_RAPIDAS.length - 1;
+  return (
+    <Pregunta
+      refTitulo={refTitulo}
+      pasoTexto={`Paso ${PASOS_CONTEXTO + indice + 1} de ${TOTAL_PASOS} · Lectura rápida`}
+      titulo={p.texto}
+      ayuda={p.ejemplo}
+      pie={ultima ? 'Estás a un paso de ver tu lectura rápida.' : 'Sin tarjeta. Tus respuestas quedan guardadas.'}
+      tituloMediano
+    >
+      <Opciones<IdRapida>
+        opciones={opciones}
+        valor={typeof respuesta === 'number' ? ID_RAPIDA(respuesta) : undefined}
+        onElegir={(id) => onResponder(p.dimension, Number(id.slice(1)) as ValorRapido)}
+      />
+      <button
+        type="button"
+        onClick={() => onResponder(p.dimension, 'no_se')}
+        aria-pressed={respuesta === 'no_se'}
+        className={`mx-auto mt-2 flex h-12 items-center justify-center px-4 text-base underline [touch-action:manipulation] ${
+          respuesta === 'no_se' ? 'font-semibold text-[var(--accent)]' : 'text-[var(--text-secondary)]'
+        }`}
+      >
+        {respuesta === 'no_se' ? 'Marcado: aún no lo sé' : 'Aún no lo sé'}
+      </button>
+    </Pregunta>
   );
 }
 
@@ -318,7 +397,7 @@ function PasoEmpresa({
       }}
       className="flex flex-1 flex-col"
     >
-      <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Pregunta 2 de {TOTAL_PASOS}</p>
+      <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Paso 2 de {TOTAL_PASOS}</p>
       <h1
         ref={refTitulo}
         tabIndex={-1}
@@ -433,12 +512,12 @@ function Construyendo({
   const lineas = [
     `Armando la ruta de ${respuestas.empresa ?? 'tu empresa'}`,
     `Ajustando las preguntas a una empresa ${respuestas.tamano ? TAMANO_TEXTO[respuestas.tamano] : ''}`.trim(),
-    'Ordenando Ambiental, Social, Gobernanza y Económica',
+    'Leyendo tus respuestas de las 4 dimensiones',
     respuestas.rol === 'varias' ? 'Dejando espacio para tus demás empresas' : 'Preparando tu primer diagnóstico',
   ];
 
   useEffect(() => {
-    const pausa = reduce ? 250 : 600;
+    const pausa = reduce ? 200 : 350;
     const ids = lineas.map((_, i) => setTimeout(() => setHecho(i + 1), pausa * (i + 1)));
     const fin = setTimeout(() => {
       if (inicioCompleto(leerInicio())) alTerminar();
@@ -581,30 +660,26 @@ function RutaLista({
   refTitulo,
   respuestas,
   onReiniciar,
+  onEditarDimension,
 }: {
   refTitulo: React.RefObject<HTMLHeadingElement | null>;
   respuestas: RespuestasInicio;
   onReiniciar: () => void;
+  onEditarDimension: (dimension: DimRapida) => void;
 }) {
-  const motivo = respuestas.motivo ?? 'otra';
-  const dimensiones = [
-    { nombre: 'Ambiental', icono: Leaf },
-    { nombre: 'Social', icono: Users },
-    { nombre: 'Gobernanza', icono: Scale },
-    { nombre: 'Económica', icono: TrendingUp },
-  ];
+  const lectura = lecturaRapida(respuestas.rapida);
 
   return (
     <>
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Tu ruta está lista</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">Tu lectura rápida</p>
           <h1
             ref={refTitulo}
             tabIndex={-1}
             className="mt-2 text-balance text-3xl font-bold leading-tight outline-none [font-family:var(--font-display)]"
           >
-            Ya sabes por dónde empezar
+            Esto es lo que vemos hoy
           </h1>
         </div>
         <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5, ease: EASE }}>
@@ -612,28 +687,33 @@ function RutaLista({
         </motion.div>
       </div>
       <p className="mt-2 truncate text-base font-semibold text-[var(--text-primary)]">{respuestas.empresa}</p>
-      <p className="mt-3 text-base text-[var(--text-secondary)]">{RESULTADO_POR_MOTIVO[motivo]}</p>
 
-      <section aria-label="Lo que vas a diligenciar" className="mt-8 rounded-[var(--radius-card)] bg-[var(--surface)] p-5 shadow-[var(--shadow-1)]">
-        <p className="text-sm font-semibold text-[var(--text-secondary)]">Vas a diligenciar</p>
-        <ul className="mt-4 grid grid-cols-2 gap-3">
-          {dimensiones.map(({ nombre, icono: Icono }) => (
-            <li key={nombre} className="flex items-center gap-3 text-base">
-              <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-[var(--radius-button)] bg-[var(--chip-bg)]">
-                <Icono size={18} color="var(--accent)" />
-              </span>
-              {nombre}
-            </li>
-          ))}
-          <li className="col-span-2 flex items-center gap-3 text-base">
-            <span aria-hidden="true" className="flex size-10 shrink-0 items-center justify-center rounded-[var(--radius-button)] bg-[color-mix(in_oklab,var(--accent-2)_12%,transparent)]">
-              <Layers size={18} color="var(--accent-2)" />
-            </span>
-            Cadena de valor
-          </li>
-        </ul>
+      <section aria-label="Lectura por dimensión" className="mt-4 rounded-[var(--radius-card)] bg-[var(--surface)] p-5 shadow-[var(--shadow-1)]">
+        <LecturaRapidaCard lectura={lectura} retraso={0.2} onEditar={onEditarDimension} />
+
+        {(lectura.fortaleza || lectura.atencion.length > 0) && (
+          <div className="mt-5 flex flex-col gap-3 border-t border-[color-mix(in_oklab,var(--text-tertiary)_25%,transparent)] pt-4 text-base">
+            {lectura.fortaleza && (
+              <p className="flex items-start gap-3">
+                <Sparkles size={18} className="mt-0.5 shrink-0 text-[var(--accent)]" aria-hidden="true" />
+                <span>
+                  <strong className="font-semibold">Punto fuerte:</strong> {NOMBRE_DIMENSION[lectura.fortaleza]}
+                </span>
+              </p>
+            )}
+            {lectura.atencion.length > 0 && (
+              <p className="flex items-start gap-3">
+                <Flag size={18} className="mt-0.5 shrink-0 text-[var(--accent-2)]" aria-hidden="true" />
+                <span>
+                  <strong className="font-semibold">Por dónde empezar:</strong> {lectura.atencion.map((d) => NOMBRE_DIMENSION[d]).join(' y ')}
+                </span>
+              </p>
+            )}
+          </div>
+        )}
+
         <p className="mt-4 border-t border-[color-mix(in_oklab,var(--text-tertiary)_25%,transparent)] pt-4 text-sm text-[var(--text-secondary)]">
-          Son cerca de 40 preguntas. Puedes parar y seguir otro día: lo que respondas queda guardado.
+          Lectura preliminar con 4 preguntas. Toca una fila para cambiarla.
         </p>
       </section>
 
@@ -645,7 +725,7 @@ function RutaLista({
           Ver mis {TRIAL_DIAS} días gratis
         </Link>
         <p className="mt-3 text-center text-sm text-[var(--text-secondary)]">Sin tarjeta. No se cobra nada automáticamente.</p>
-        <button type="button" onClick={onReiniciar} className="mx-auto mt-4 flex h-12 items-center text-sm text-[var(--text-secondary)] underline">
+        <button type="button" onClick={onReiniciar} className="mx-auto mt-6 flex h-12 items-center px-4 text-base text-[var(--text-secondary)] underline">
           Cambiar mis respuestas
         </button>
       </div>

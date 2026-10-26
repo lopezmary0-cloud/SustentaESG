@@ -3,6 +3,8 @@
 // reemplaza por Supabase con las mismas formas de datos (docs: ESTADO.md → Decisiones técnicas).
 // Nada de esto guarda contraseñas ni datos de pago.
 
+import { lecturaRapida, type RapidaGuardada } from '@/lib/diagnostico/rapida';
+
 export type Rol = 'propia' | 'varias' | 'otra';
 export type Motivo = 'cliente' | 'direccion' | 'ordenar' | 'cero' | 'otra';
 export type Tamano = '1-10' | '11-50' | '51-200' | '200+';
@@ -17,6 +19,8 @@ export interface RespuestasInicio {
   empresa?: string;
   actividad?: string;
   tamano?: Tamano;
+  /** Lectura rápida: 1 respuesta por dimensión (o «no_se»). No cuenta en las 40 preguntas del diagnóstico. */
+  rapida?: RapidaGuardada;
   pais: 'Colombia';
 }
 
@@ -75,7 +79,7 @@ export function guardarInicio(parcial: Partial<RespuestasInicio>): RespuestasIni
 }
 
 export function inicioCompleto(r: RespuestasInicio): boolean {
-  return Boolean(r.rol && r.motivo && r.empresa && r.actividad && r.tamano);
+  return Boolean(r.rol && r.motivo && r.empresa && r.actividad && r.tamano && lecturaRapida(r.rapida).completa);
 }
 
 export function leerPlan(): PreferenciaPlan | null {
