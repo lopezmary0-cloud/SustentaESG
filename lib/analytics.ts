@@ -8,6 +8,7 @@ export type EventoCamino =
   | 'onboarding_paso'
   | 'resultado_visto'
   | 'planes_visto'
+  | 'planes_salida'
   | 'prueba_elegida'
   | 'registro_iniciado'
   | 'cuenta_creada'

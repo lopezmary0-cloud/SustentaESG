@@ -6,13 +6,13 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react';
-import { CalendarCheck, Check, Flag, Sparkles } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
+import { CalendarCheck, Check, ChevronDown, Flag, Sparkles } from 'lucide-react';
 import { Marco } from '@/components/flujo/Marco';
 import { RuedaMini } from '@/components/flujo/RuedaMini';
 import { track } from '@/lib/analytics';
 import { MODO_DEMO, sesionActual } from '@/lib/auth';
-import { guardarPlan, leerInicio, leerPlan, perfilSugerido, type Ciclo, type Perfil } from '@/lib/demo/store';
+import { guardarPlan, leerInicio, leerPlan, perfilSugerido, type Ciclo, type Motivo, type Perfil } from '@/lib/demo/store';
 import { NOMBRE_DIMENSION } from '@/lib/diagnostico/banco';
 import { lecturaRapida } from '@/lib/diagnostico/rapida';
 import { PLANES } from '@/lib/planes';
@@ -20,10 +20,23 @@ import { TRIAL_DIAS } from '@/lib/site';
 import { useMontado } from '@/lib/useMontado';
 
 const LINEA_TIEMPO = [
-  { icono: Sparkles, cuando: 'Hoy', titulo: 'Empiezas' },
-  { icono: CalendarCheck, cuando: 'Día 5', titulo: 'Aviso' },
-  { icono: Flag, cuando: `Día ${TRIAL_DIAS}`, titulo: 'Decides' },
+  { icono: Sparkles, cuando: 'Hoy', dias: 0, titulo: 'Empiezas' },
+  { icono: CalendarCheck, cuando: 'Día 5', dias: 5, titulo: 'Aviso' },
+  { icono: Flag, cuando: `Día ${TRIAL_DIAS}`, dias: TRIAL_DIAS, titulo: 'Decides' },
 ];
+
+/** Titular según para qué vino la persona (respuesta del recorrido): la promesa se parece a su motivo. */
+const TITULARES: Record<Motivo, { antes: string; acento: string }> = {
+  cliente: { antes: 'Responde a clientes y bancos', acento: 'sin reconstruir datos' },
+  direccion: { antes: 'Muestra a tu dirección cómo estás,', acento: 'con datos ordenados' },
+  ordenar: { antes: 'Deja de reconstruir tus datos:', acento: 'empieza hoy' },
+  cero: { antes: 'Deja de reconstruir tus datos:', acento: 'empieza hoy' },
+  otra: { antes: 'Deja de reconstruir tus datos:', acento: 'empieza hoy' },
+};
+
+const formatoDia = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'short' });
+const formatoDiaLargo = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'long' });
+const sumarDias = (base: Date, dias: number) => new Date(base.getFullYear(), base.getMonth(), base.getDate() + dias);
 
 export function Planes() {
   const montado = useMontado();
@@ -44,6 +57,16 @@ function PlanesCliente() {
   const [perfil, setPerfil] = useState<Perfil>(() => leerPlan()?.perfil ?? perfilSugerido(leerInicio()));
   const [ciclo, setCiclo] = useState<Ciclo>(() => leerPlan()?.ciclo ?? 'anual');
   const [empresa] = useState(() => leerInicio().empresa);
+  const [motivo] = useState<Motivo>(() => leerInicio().motivo ?? 'otra');
+  const [hoy] = useState(() => new Date());
+  const titular = TITULARES[motivo];
+  const reduce = useReducedMotion();
+  /** Entrada escalonada (60 ms entre bloques); sin desplazamiento si la persona pidió menos movimiento. */
+  const entrada = (i: number) => ({
+    initial: { opacity: 0, y: reduce ? 0 : 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.4, delay: reduce ? 0 : 0.06 * i, ease: [0.32, 0.72, 0, 1] as const },
+  });
   const [lectura] = useState(() => lecturaRapida(leerInicio().rapida));
   const [conSesion] = useState(() => sesionActual() !== null);
   const [abriendo, setAbriendo] = useState(false);
@@ -59,12 +82,12 @@ function PlanesCliente() {
       </p>
       <div className="mt-2 flex items-center justify-between gap-4">
         <h1 className="text-balance text-3xl font-bold leading-tight [font-family:var(--font-display)]">
-          Deja de reconstruir tus datos: <span className="text-[var(--accent)]">empieza hoy</span>
+          {titular.antes} <span className="text-[var(--accent)]">{titular.acento}</span>
         </h1>
         <RuedaMini tamano={56} />
       </div>
       <p className="mt-2 text-base text-[var(--text-secondary)]">
-        {TRIAL_DIAS} días gratis, sin tarjeta. Cuando un cliente o un banco te pida información, que ya esté ordenada.
+        Tu prueba de {TRIAL_DIAS} días termina el {formatoDiaLargo.format(sumarDias(hoy, TRIAL_DIAS))}. Sin tarjeta y sin cobro automático.
       </p>
 
       {lectura.completa && (lectura.fortaleza || lectura.atencion.length > 0) && (
@@ -76,27 +99,22 @@ function PlanesCliente() {
       )}
 
       <ol className="mt-6 grid grid-cols-[repeat(3,minmax(0,1fr))] gap-3" aria-label="Qué pasa durante la prueba">
-        {LINEA_TIEMPO.map((paso) => (
-          <li key={paso.cuando} className="rounded-[var(--radius-card)] bg-[var(--surface)] p-3 shadow-[var(--shadow-1)]">
+        {LINEA_TIEMPO.map((paso, i) => (
+          <motion.li key={paso.cuando} {...entrada(i)} className="rounded-[var(--radius-card)] bg-[var(--surface)] p-3 shadow-[var(--shadow-1)]">
             <span aria-hidden="true" className="flex size-10 items-center justify-center rounded-full bg-[var(--chip-bg)]">
               <paso.icono size={18} color="var(--accent)" />
             </span>
             <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-[var(--text-secondary)]">{paso.cuando}</p>
             <p className="mt-1 text-base font-semibold leading-snug">{paso.titulo}</p>
-          </li>
+            <p className="mt-1 text-sm tabular-nums text-[var(--text-secondary)]">{formatoDia.format(sumarDias(hoy, paso.dias))}</p>
+          </motion.li>
         ))}
       </ol>
       <p className="mt-3 text-sm text-[var(--text-secondary)]">
-        Todo desbloqueado desde hoy. Si no eliges un plan al final, tu diagnóstico queda guardado para consultarlo.
+        Todo desbloqueado desde hoy. El día {TRIAL_DIAS} eliges si sigues; si no, tu diagnóstico queda guardado para consultarlo.
       </p>
 
-      {MODO_DEMO && (
-        <p className="mb-6 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent-2)_45%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_10%,transparent)] p-3 text-sm">
-          Versión de demostración: el aviso por correo del día 5 todavía no se envía.
-        </p>
-      )}
-
-      <section aria-label="Elige tu plan para después de la prueba" className="mt-2">
+      <motion.section {...entrada(2)} aria-label="Elige tu plan para después de la prueba" className="mt-6">
         <h2 className="text-lg font-semibold">Después de la prueba, elige cómo seguir</h2>
 
         <div role="tablist" aria-label="Tipo de plan" className="mt-4 flex gap-2 rounded-[var(--radius-button)] border border-[color-mix(in_oklab,var(--text-tertiary)_35%,transparent)] bg-[var(--surface)] p-1">
@@ -159,7 +177,17 @@ function PlanesCliente() {
                   <span className="flex items-center gap-2 text-base font-semibold">
                     {info.etiqueta}
                   </span>
-                  <span className="mt-1 block text-sm text-[var(--text-secondary)]">{info.detalle}</span>
+                  <span className="mt-1 block text-sm text-[var(--text-secondary)]">
+                    {info.detalle}
+                    {info.antes && (
+                      <>
+                        {' '}
+                        <s className="opacity-70" aria-label={`antes ${info.antes}`}>
+                          {info.antes}
+                        </s>
+                      </>
+                    )}
+                  </span>
                   {info.insignia && (
                     <span className="mt-2 inline-block whitespace-nowrap rounded-full bg-[var(--accent)] px-2 py-0.5 text-xs font-semibold text-[var(--bg)]">{info.insignia}</span>
                   )}
@@ -173,9 +201,9 @@ function PlanesCliente() {
           })}
         </div>
 
-      </section>
+      </motion.section>
 
-      <div className="mt-6">
+      <motion.div {...entrada(3)} className="mt-6">
         <Link
           href={destino}
           aria-busy={abriendo}
@@ -193,7 +221,11 @@ function PlanesCliente() {
           {abriendo ? 'Abriendo…' : `Empezar mis ${TRIAL_DIAS} días gratis`}
         </Link>
         <p className="mt-3 text-center text-sm text-[var(--text-secondary)]">Sin tarjeta. No se cobra nada automáticamente.</p>
-        <Link href="/" className="mx-auto mt-2 flex h-12 w-fit items-center px-4 text-sm text-[var(--text-secondary)] underline">
+        <Link
+          href="/"
+          onClick={() => track('planes_salida', { perfil, ciclo })}
+          className="mx-auto mt-2 flex h-12 w-fit items-center px-4 text-sm text-[var(--text-secondary)] underline"
+        >
           Ahora no
         </Link>
 
@@ -207,11 +239,45 @@ function PlanesCliente() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-sm text-[var(--text-secondary)]">
-          Al terminar la prueba te pedimos el pago solo si decides seguir (precios en dólares). Cancelas cuando quieras. Los datos de tus empresas son privados: nadie más los ve.
+        <div className="mt-6 flex flex-col">
+          <Pregunta pregunta="¿Cuándo se me cobrará?">
+            No se cobra nada automáticamente. El {formatoDiaLargo.format(sumarDias(hoy, TRIAL_DIAS))} termina tu prueba y, si quieres seguir, ese día eliges un plan (precios en dólares).
+          </Pregunta>
+          <Pregunta pregunta="¿Y si no sigo?">
+            Tu diagnóstico queda guardado para consultarlo. Los datos de tus empresas son privados: nadie más los ve.
+          </Pregunta>
+        </div>
+        {MODO_DEMO && (
+          <p className="mt-4 rounded-[var(--radius-card)] border border-[color-mix(in_oklab,var(--accent-2)_45%,transparent)] bg-[color-mix(in_oklab,var(--accent-2)_10%,transparent)] p-3 text-sm">
+            Versión de demostración: el aviso por correo del día 5 todavía no se envía.
+          </p>
+        )}
+        <p className="mt-4 flex flex-wrap justify-center gap-x-4 text-sm text-[var(--text-secondary)]">
+          <Link href="/terminos" className="flex h-12 items-center underline">
+            Términos
+          </Link>
+          <Link href="/privacidad" className="flex h-12 items-center underline">
+            Privacidad
+          </Link>
+          <Link href="/reembolsos" className="flex h-12 items-center underline">
+            Reembolsos
+          </Link>
         </p>
-      </div>
+      </motion.div>
     </Marco>
+  );
+}
+
+/** Pregunta frecuente en el punto de decisión: se abre y se cierra, con el texto a la vista al abrir. */
+function Pregunta({ pregunta, children }: { pregunta: string; children: React.ReactNode }) {
+  return (
+    <details className="group border-t border-[color-mix(in_oklab,var(--text-tertiary)_25%,transparent)]">
+      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 text-base font-medium">
+        {pregunta}
+        <ChevronDown size={18} className="shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+      </summary>
+      <p className="pb-3 text-sm leading-relaxed text-[var(--text-secondary)]">{children}</p>
+    </details>
   );
 }
 
